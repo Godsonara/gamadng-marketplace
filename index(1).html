@@ -58,7 +58,32 @@ function render(){
  document.querySelectorAll('[data-details]').forEach(b=>b.onclick=()=>{let x=items.find(z=>z.id===b.dataset.details);alert(`${x.title}\n${money(x)} · ${x.condition}\n${x.category} · ${x.location}\n\n${x.description}`)});
  document.querySelectorAll('[data-contact]').forEach(b=>b.onclick=()=>{let x=items.find(z=>z.id===b.dataset.contact);let n=String(x.phone||'').replace(/\D/g,'');if(n.startsWith('0'))n='234'+n.slice(1);if(!n){alert('Seller has not provided a valid contact number.');return}if(confirm('You will contact the seller directly. Verify the item and seller before paying. Continue to WhatsApp?'))window.open('https://wa.me/'+n+'?text='+encodeURIComponent('Hello, I saw '+x.title+' on GamadNg Marketplace. Is it available?'),'_blank','noopener')})
  }
-async function updateAuth(){if(!client){$('authStatus').textContent='Setup needed: connect Supabase';$('authButton').hidden=false;return;}const {data}=await client.auth.getSession();user=data.session?.user||null;$('authStatus').textContent=user?'Signed in: '+user.email:'Browse listings · Sign in to sell';// Keep Sign in / Register visible in the header.$('authButton').hidden=false;// Show Sign out only when a user is signed in.$('signOut').hidden=!user;}
+async function updateAuth() {
+  if (!client) {
+    $('authStatus').textContent = 'Setup needed: connect Supabase';
+    $('authButton').hidden = false;
+    $('signOut').hidden = true;
+    return;
+  }
+
+  const { data, error } = await client.auth.getSession();
+
+  if (error) {
+    $('authStatus').textContent = 'Could not check sign-in status.';
+    $('authButton').hidden = false;
+    return;
+  }
+
+  user = data.session?.user || null;
+
+  $('authStatus').textContent = user
+    ? 'Signed in: ' + user.email
+    : 'Browse listings · Sign in to sell';
+
+  $('authButton').hidden = false;
+  $('signOut').hidden = !user;
+}
+
 $('authButton').onclick=()=>{$('authMessage').textContent='';openModal('authModal')};
 $('signOut').onclick=async()=>{await client.auth.signOut();await updateAuth();alert('Signed out.')};
 $('registerButton').onclick=async()=>{if(!client)return;const f=new FormData($('authForm')),email=f.get('email'),password=f.get('password');$('authMessage').textContent='Creating account…';const {data,error}=await client.auth.signUp({email,password});$('authMessage').textContent=error?error.message:(data.session?'Account created and signed in.':'Account created. Check your email for a confirmation link.');if(data.session){await updateAuth();setTimeout(()=>closeModal('authModal'),700)}};
