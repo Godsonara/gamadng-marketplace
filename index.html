@@ -93,6 +93,22 @@ document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if
 document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal.open').forEach(m=>closeModal(m.id))});
 function showSetup(message){$('setupNotice').hidden=false;$('setupNotice').textContent=message}
 function setAuthMessage(message){$('authMessage').textContent=message}
+  
+let toastTimer;
+
+function showToast(message, type = 'success') {
+  const toast = $('toast');
+  $('toastMessage').textContent = message;
+  $('toastIcon').textContent = type === 'error' ? '!' : '✓';
+  toast.classList.toggle('error', type === 'error');
+  toast.classList.add('show');
+
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3500);
+}
+
 function renderCats(){$('cats').innerHTML=CATS.map(c=>`<button type="button" class="chip ${cat===c?'active':''}" data-cat="${esc(c)}">${esc(c)}</button>`).join('');document.querySelectorAll('[data-cat]').forEach(b=>b.addEventListener('click',()=>{cat=b.dataset.cat;renderCats();render()}))}
 async function loadListings(){
  if(!client){items=[];render();return}
