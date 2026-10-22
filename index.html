@@ -64,6 +64,19 @@ input,select,textarea{padding:12px;border:1px solid var(--line);border-radius:9p
 
 <div class="modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle"><div class="panel"><h2 id="authTitle">Sign in or register</h2><p class="muted">Use an email address you can access. Supabase may send a confirmation email.</p><form id="authForm"><div class="formgrid"><label class="full">Email address<input name="email" type="email" required autocomplete="email"></label><label class="full">Password<input name="password" type="password" required minlength="8" autocomplete="current-password"></label></div><div class="formactions"><button type="button" class="outline" data-close="authModal">Cancel</button><button type="button" class="outline" id="registerButton">Create account</button><button type="submit" class="primary">Sign in</button></div><p id="authMessage" class="muted" role="status" aria-live="polite"></p></form></div></div>
 
+<div class="modal" id="detailsModal" role="dialog" aria-modal="true" aria-labelledby="detailsTitle">
+  <div class="panel">
+    <img id="detailsPhoto" alt="Product photo" style="width:100%;max-height:280px;object-fit:contain;border-radius:12px" hidden>
+    <h2 id="detailsTitle">Item details</h2>
+    <p id="detailsPrice" class="price"></p>
+    <p id="detailsMeta" class="muted"></p>
+    <h3>About this item</h3>
+    <p id="detailsDescription" style="white-space:pre-wrap;overflow-wrap:anywhere"></p>
+    <div class="formactions">
+      <button type="button" class="outline" data-close="detailsModal">Close</button>
+    </div>
+  </div>
+  </div>
 <div class="modal" id="sellModal" role="dialog" aria-modal="true" aria-labelledby="sellTitle"><div class="panel"><h2 id="sellTitle">List an item</h2><p class="muted">Sign in first. Your listing and image will be stored online.</p><form id="listingForm"><div class="formgrid">
 <label class="full">Item title *<input name="title" required maxlength="90"></label>
 <label>Price *<input name="price" type="number" min="0" step="0.01" required></label>
