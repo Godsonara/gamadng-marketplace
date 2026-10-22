@@ -86,7 +86,18 @@ function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&l
 function money(x){const amount=Number(x.price);return (SYMBOLS[x.currency]||'')+(Number.isFinite(amount)?amount.toLocaleString(undefined,{maximumFractionDigits:2}):'—')}
 function openModal(id){$(id).classList.add('open')}
 function closeModal(id){$(id).classList.remove('open')}
-document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeModal(b.dataset.close)));
+document.querySelectorAll('[data-details]').forEach(b=>b.addEventListener('click',()=>{
+  const x=items.find(z=>String(z.id)===b.dataset.details);
+  if(!x)return;
+  $('detailsTitle').textContent=x.title;
+  $('detailsPrice').textContent=money(x);
+  $('detailsMeta').textContent=x.condition+' · '+x.category+' · '+x.location;
+  $('detailsDescription').textContent=x.description||'No description provided.';
+  const photo=$('detailsPhoto');
+  photo.src=x.image_url||'';
+  photo.hidden=!x.image_url;
+  openModal('detailsModal');
+}));
 document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)closeModal(m.id)}));
 document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal.open').forEach(m=>closeModal(m.id))});
 function showSetup(message){$('setupNotice').hidden=false;$('setupNotice').textContent=message}
