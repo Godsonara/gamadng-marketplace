@@ -176,7 +176,7 @@ $('listingForm').addEventListener('submit',async e=>{
   const row={seller_id:user.id,title:String(d.get('title')||'').trim(),price:Number(d.get('price')),currency:d.get('currency'),condition:d.get('condition'),category:d.get('category'),location:String(d.get('location')||'').trim(),phone:String(d.get('phone')||'').trim(),description:String(d.get('description')||'').trim(),image_url,status:'active'};
   if(!row.title||!Number.isFinite(row.price)||row.price<0||!row.location||!row.phone||!row.description)throw new Error('Please complete all required fields correctly.');
   const {error}=await client.from('listings').insert(row);if(error)throw error;
-  closeModal('sellModal');f.reset();await loadListings();alert('Your listing has been published.');
+  closeModal('sellModal');f.reset();await loadListings();showToast('Your listing is live! 🎉');
  }catch(error){$('listingMessage').textContent='Could not publish: '+(error.message||String(error));if(uploadedPath){try{await client.storage.from('listing-images').remove([uploadedPath])}catch(cleanupError){/* Keep the original error visible. */}}}
  finally{publish.disabled=false}
 });
