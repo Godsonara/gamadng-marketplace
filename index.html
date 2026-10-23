@@ -1,230 +1,214 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#126b52">
-<title>GamadNg Marketplace</title>
-<style>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#126b52">
+    <title>GamadNg Marketplace</title>
+    <style>
 :root{--g:#126b52;--bg:#f5f8f5;--line:#dfe8e1;--ink:#17231e;--muted:#65736c}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);font:16px Arial,sans-serif;color:var(--ink)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:16px Arial,sans-serif;color:var(--ink)}
 header{background:var(--g);color:white;padding:18px max(16px,calc((100% - 1100px)/2));display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-h1{font-size:22px;margin:0}.tag{font-size:12px;margin-top:5px}
-button{border:0;border-radius:9px;padding:11px 14px;font-weight:bold;cursor:pointer}
-button:disabled{opacity:.65;cursor:wait}
+h1{font-size:22px;margin:0}.tag{font-size:12px;margin-top:5px}button{border:0;border-radius:9px;padding:11px 14px;font-weight:bold;cursor:pointer}button:disabled{opacity:.65;cursor:wait}
 .primary{background:var(--g);color:white}.light{background:white;color:var(--g)}.outline{background:white;border:1px solid var(--line);color:var(--ink)}
-/* Keep the sign-in button visible even if an older script sets its hidden attribute. */
-#authButton{display:inline-flex!important;visibility:visible!important;opacity:1!important;align-items:center;justify-content:center}
-#authButton[hidden]{display:inline-flex!important}
+#authButton{display:inline-flex!important;visibility:visible!important;opacity:1!important;align-items:center;justify-content:center}#authButton[hidden]{display:inline-flex!important}
 main{max-width:1100px;margin:auto;padding:20px}.hero{background:#e2f0e7;padding:24px;border-radius:16px;margin-bottom:18px}.hero h2{font-size:32px;margin:0 0 10px}
-.search{display:flex;gap:8px;margin-bottom:12px}.search input{flex:1;min-width:0}
-input,select,textarea{padding:12px;border:1px solid var(--line);border-radius:9px;font:inherit;background:white;width:100%}
+.search{display:flex;gap:8px;margin-bottom:12px}.search input{flex:1;min-width:0}input,select,textarea{padding:12px;border:1px solid var(--line);border-radius:9px;font:inherit;background:white;width:100%}
 .chips{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.chip{background:white;border:1px solid var(--line);border-radius:20px;padding:9px 12px}.chip.active{background:var(--g);color:white}
-.filters{display:flex;gap:8px;margin:12px 0}.filters select{max-width:190px}
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.card{background:white;border:1px solid var(--line);border-radius:13px;overflow:hidden;min-width:0}
-.pic{height:140px;background:#e8f0eb;display:grid;place-items:center;font-size:55px;position:relative}.pic img{width:100%;height:100%;object-fit:cover}
-.badge{position:absolute;left:8px;top:8px;background:white;border-radius:5px;padding:5px;font-size:12px}.body{padding:12px;overflow-wrap:anywhere}.price{color:var(--g);font-weight:bold;font-size:18px;margin:9px 0}.muted{color:var(--muted);font-size:13px}
+.filters{display:flex;gap:8px;margin:12px 0}.filters select{max-width:190px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.card{background:white;border:1px solid var(--line);border-radius:13px;overflow:hidden;min-width:0}.pic{height:155px;background:#e8f0eb;display:grid;place-items:center;font-size:55px;position:relative;overflow:hidden}.pic img{width:100%;height:100%;object-fit:cover}
+.badge{position:absolute;left:8px;top:8px;background:white;border-radius:5px;padding:5px;font-size:12px}.body{padding:12px;overflow-wrap:anywhere}.price{color:var(--g);font-weight:bold;font-size:20px;margin:9px 0}.muted{color:var(--muted);font-size:13px}
 .actions{display:flex;gap:7px;margin-top:12px}.actions button{flex:1;padding:9px 5px;font-size:12px}.empty{padding:30px;text-align:center;background:white;border-radius:12px;grid-column:1/-1}
 .notice{padding:12px;background:#fff5d9;border:1px solid #ead79a;border-radius:10px;margin:12px 0;font-size:14px;overflow-wrap:anywhere}
 .modal{display:none;position:fixed;inset:0;background:#0009;align-items:center;justify-content:center;padding:14px;z-index:20}.modal.open{display:flex}.panel{background:white;border-radius:15px;padding:20px;width:min(620px,100%);max-height:92vh;overflow:auto}
-.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{font-size:13px;font-weight:bold;display:grid;gap:6px}.full{grid-column:1/-1}.formactions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px;flex-wrap:wrap}.topbuttons{display:flex;gap:8px;flex-wrap:wrap;align-items:center}footer{text-align:center;color:var(--muted);padding:25px;font-size:13px}.status{font-size:13px;color:#fff;margin-top:4px;overflow-wrap:anywhere}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{font-size:13px;font-weight:bold;display:grid;gap:6px}.full{grid-column:1/-1}.formactions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px;flex-wrap:wrap}.topbuttons{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+footer{text-align:center;color:var(--muted);padding:25px;font-size:13px}.status{font-size:13px;color:white;margin-top:4px;overflow-wrap:anywhere}
+.toast{position:fixed;left:16px;right:16px;bottom:24px;z-index:9999;display:flex;align-items:center;gap:12px;padding:16px;border-radius:14px;background:#126b52;color:white;box-shadow:0 8px 28px #0003;font-size:15px;line-height:1.5;opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .25s,transform .25s}.toast.show{opacity:1;transform:translateY(0)}.toast.error{background:#a52828}.toast-icon{font-size:22px;font-weight:bold}
+.details-photo{width:100%;max-height:280px;object-fit:contain;border-radius:12px;background:#f2f5f2;margin-bottom:12px}.details-description{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.6}
 @media(max-width:800px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:480px){header{padding:14px;align-items:flex-start}header>div{max-width:100%}.topbuttons{width:100%}.topbuttons button{flex:1;padding:10px 8px;font-size:13px}main{padding:12px}.grid{gap:9px}.pic{height:115px}.hero h2{font-size:27px}.formgrid{grid-template-columns:1fr}.full{grid-column:1}.filters select{min-width:0}.actions{flex-direction:column}.search button{padding:10px}}
+@media(max-width:480px){header{padding:14px;align-items:flex-start}header>div{max-width:100%}.topbuttons{width:100%}.topbuttons button{flex:1;padding:10px 8px;font-size:13px}main{padding:12px}.grid{gap:9px}.pic{height:120px}.hero h2{font-size:27px}.formgrid{grid-template-columns:1fr}.full{grid-column:1}.filters select{min-width:0}.actions{flex-direction:column}.search button{padding:10px}.panel{padding:16px}}
 </style>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./config.js"></script>
-</head>
-<body> 
-<div id="toast" class="toast" role="status" aria-live="polite">
-  <span id="toastIcon" class="toast-icon">✓</span>
-  <span id="toastMessage">Welcome to GamadNg Marketplace</span>
-</div>
-<header>
-  <div>
-    <h1>GamadNg Marketplace</h1>
-    <div class="tag">Buy new. Buy used. Sell worldwide.</div>
-    <div class="status" id="authStatus" role="status" aria-live="polite">Connecting to marketplace…</div>
-  </div>
-  <div class="topbuttons">
-    <button class="light" id="authButton" type="button">Sign in / Register</button>
-    <button class="light" id="sellTop" type="button">＋ Sell an item</button>
-    <button class="light" id="signOut" type="button" hidden>Sign out</button>
-  </div>
-</header>
-<main>
-  <section class="hero"><h2>Good finds. Great deals.</h2><p>Discover new and pre-loved items. Contact sellers directly and agree on payment and delivery.</p><button class="primary" id="sellHero" type="button">Start selling for free</button></section>
-  <div id="setupNotice" class="notice" role="status" hidden></div>
-  <div class="search"><input id="q" type="search" placeholder="Search products, category or location" aria-label="Search listings"><button class="primary" id="search" type="button">Search</button></div>
-  <div class="chips" id="cats" aria-label="Categories"></div>
-  <div class="filters"><select id="condition" aria-label="Filter by condition"><option value="All">New and used</option><option>New</option><option>Used</option><option>Refurbished</option></select><select id="sort" aria-label="Sort listings"><option value="newest">Newest first</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option></select></div>
-  <h2 id="heading">Explore items</h2><p class="muted" id="count"></p><section class="grid" id="grid" aria-live="polite"></section>
-</main>
-<footer>GamadNg Marketplace · Supabase-connected starter. Never send payment before verifying the seller and item.</footer>
-
-<div class="modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle"><div class="panel"><h2 id="authTitle">Sign in or register</h2><p class="muted">Use an email address you can access. Supabase may send a confirmation email.</p><form id="authForm"><div class="formgrid"><label class="full">Email address<input name="email" type="email" required autocomplete="email"></label><label class="full">Password<input name="password" type="password" required minlength="8" autocomplete="current-password"></label></div><div class="formactions"><button type="button" class="outline" data-close="authModal">Cancel</button><button type="button" class="outline" id="registerButton">Create account</button><button type="submit" class="primary">Sign in</button></div><p id="authMessage" class="muted" role="status" aria-live="polite"></p></form></div></div>
-
-<div class="modal" id="detailsModal" role="dialog" aria-modal="true" aria-labelledby="detailsTitle">
-  <div class="panel">
-    <img id="detailsPhoto" alt="Product photo" style="width:100%;max-height:280px;object-fit:contain;border-radius:12px" hidden>
-    <h2 id="detailsTitle">Item details</h2>
-    <p id="detailsPrice" class="price"></p>
-    <p id="detailsMeta" class="muted"></p>
-    <h3>About this item</h3>
-    <p id="detailsDescription" style="white-space:pre-wrap;overflow-wrap:anywhere"></p>
-    <div class="formactions">
-      <button type="button" class="outline" data-close="detailsModal">Close</button>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./config.js"></script>
+  </head>
+  <body>
+    <div id="toast" class="toast" role="status" aria-live="polite">
+      <span id="toastIcon" class="toast-icon">✓</span>
+      <span id="toastMessage">Welcome to GamadNg Marketplace</span>
     </div>
+    <header>
+      <div>
+        <h1>GamadNg Marketplace</h1>
+        <div class="tag">Buy new. Buy used. Sell worldwide.</div>
+        <div class="status" id="authStatus" role="status" aria-live="polite">Connecting to marketplace…</div>
+      </div>
+      <div class="topbuttons">
+        <button class="light" id="authButton" type="button">Sign in / Register</button>
+        <button class="light" id="sellTop" type="button">＋ Sell an item</button>
+        <button class="light" id="signOut" type="button" hidden>Sign out</button>
+      </div>
+    </header>
+    <main>
+      <section class="hero">
+        <h2>Good finds. Great deals.</h2>
+        <p>Discover new and pre-loved items. Contact sellers directly and agree on payment and delivery.</p>
+        <button class="primary" id="sellHero" type="button">Start selling for free</button>
+      </section>
+      <div id="setupNotice" class="notice" role="status" hidden>
+      </div>
+      <div class="search">
+        <input id="q" type="search" placeholder="Search products, category or location" aria-label="Search listings">
+        <button class="primary" id="search" type="button">Search</button>
+      </div>
+      <div class="chips" id="cats" aria-label="Categories">
+      </div>
+      <div class="filters">
+        <select id="condition" aria-label="Filter by condition">
+          <option value="All">New and used</option>
+          <option>New</option>
+          <option>Used</option>
+          <option>Refurbished</option>
+        </select>
+        <select id="sort" aria-label="Sort listings">
+          <option value="newest">Newest first</option>
+          <option value="low">Price: low to high</option>
+          <option value="high">Price: high to low</option>
+        </select>
+      </div>
+      <h2 id="heading">Explore items</h2>
+      <p class="muted" id="count">
+      </p>
+      <section class="grid" id="grid" aria-live="polite">
+      </section>
+    </main>
+    <footer>GamadNg Marketplace · Verify the seller and item before paying.</footer>
+    <div class="modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+      <div class="panel">
+        <h2 id="authTitle">Sign in or register</h2>
+        <p class="muted">Use an email address you can access. Supabase may send a confirmation email.</p>
+        <form id="authForm">
+          <div class="formgrid">
+            <label class="full">Email address<input name="email" type="email" required autocomplete="email">
+            </label>
+            <label class="full">Password<input name="password" type="password" required minlength="8" autocomplete="current-password">
+            </label>
+          </div>
+          <div class="formactions">
+            <button type="button" class="outline" data-close="authModal">Cancel</button>
+            <button type="button" class="outline" id="registerButton">Create account</button>
+            <button type="submit" class="primary">Sign in</button>
+          </div>
+          <p id="authMessage" class="muted" role="status" aria-live="polite">
+          </p>
+        </form>
+      </div>
+    </div>
+    <div class="modal" id="detailsModal" role="dialog" aria-modal="true" aria-labelledby="detailsTitle">
+      <div class="panel">
+        <img id="detailsPhoto" class="details-photo" alt="Product photo" hidden>
+        <h2 id="detailsTitle">Item details</h2>
+        <p id="detailsPrice" class="price">
+        </p>
+        <p id="detailsMeta" class="muted">
+        </p>
+        <h3>About this item</h3>
+        <p id="detailsDescription" class="details-description">
+        </p>
+        <div class="formactions">
+          <button type="button" class="outline" data-close="detailsModal">Close</button>
+          <button type="button" class="primary" id="detailsContact">Contact seller on WhatsApp</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="sellModal" role="dialog" aria-modal="true" aria-labelledby="sellTitle">
+      <div class="panel">
+        <h2 id="sellTitle">List an item</h2>
+        <p class="muted">Sign in first. Your listing and image will be stored online.</p>
+        <form id="listingForm">
+          <div class="formgrid">
+            <label class="full">Item title *<input name="title" required maxlength="90">
+            </label>
+            <label>Price *<input name="price" type="number" min="0" step="0.01" required>
+            </label>
+            <label>Currency<select name="currency">
+              <option value="NGN">NGN ₦</option>
+              <option value="USD">USD $</option>
+              <option value="GBP">GBP £</option>
+              <option value="EUR">EUR €</option>
+              <option value="GHS">GHS ₵</option>
+              <option value="KES">KES KSh</option>
+              <option value="ZAR">ZAR R</option>
+            </select>
+          </label>
+          <label>Condition<select name="condition">
+            <option>New</option>
+            <option>Used</option>
+            <option>Refurbished</option>
+          </select>
+        </label>
+        <label>Category<select name="category">
+          <option>Electronics</option>
+          <option>Fashion</option>
+          <option>Home &amp; Furniture</option>
+          <option>Phones &amp; Accessories</option>
+          <option>Books &amp; Education</option>
+          <option>Baby &amp; Kids</option>
+          <option>Beauty</option>
+          <option>Sports &amp; Outdoors</option>
+          <option>Vehicles</option>
+          <option>Other</option>
+        </select>
+      </label>
+      <label>Location *<input name="location" required maxlength="120" placeholder="City, country">
+      </label>
+      <label>WhatsApp number *<input name="phone" required maxlength="30" type="tel" placeholder="+2348012345678">
+      </label>
+      <label class="full">Description *<textarea name="description" required rows="3" maxlength="2000">
+      </textarea>
+    </label>
+    <label class="full">Product photo (optional)<input type="file" name="photo" id="photo" accept="image/*">
+      <span class="muted">Maximum 5 MB.</span>
+    </label>
   </div>
+  <div class="formactions">
+    <button type="button" class="outline" data-close="sellModal">Cancel</button>
+    <button class="primary" type="submit" id="publishButton">Publish listing</button>
   </div>
-<div class="modal" id="sellModal" role="dialog" aria-modal="true" aria-labelledby="sellTitle"><div class="panel"><h2 id="sellTitle">List an item</h2><p class="muted">Sign in first. Your listing and image will be stored online.</p><form id="listingForm"><div class="formgrid">
-<label class="full">Item title *<input name="title" required maxlength="90"></label>
-<label>Price *<input name="price" type="number" min="0" step="0.01" required></label>
-<label>Currency<select name="currency"><option value="NGN">NGN ₦</option><option value="USD">USD $</option><option value="GBP">GBP £</option><option value="EUR">EUR €</option><option value="GHS">GHS ₵</option><option value="KES">KES KSh</option><option value="ZAR">ZAR R</option></select></label>
-<label>Condition<select name="condition"><option>New</option><option>Used</option><option>Refurbished</option></select></label>
-<label>Category<select name="category"><option>Electronics</option><option>Fashion</option><option>Home &amp; Furniture</option><option>Phones &amp; Accessories</option><option>Books &amp; Education</option><option>Baby &amp; Kids</option><option>Beauty</option><option>Sports &amp; Outdoors</option><option>Vehicles</option><option>Other</option></select></label>
-<label>Location *<input name="location" required maxlength="120" placeholder="City, country"></label>
-<label>WhatsApp number *<input name="phone" required maxlength="30" type="tel" placeholder="+2348012345678"></label>
-<label class="full">Description *<textarea name="description" required rows="3" maxlength="2000"></textarea></label>
-<label class="full">Product photo (optional)<input type="file" name="photo" id="photo" accept="image/*"><span class="muted">Maximum 5 MB.</span></label>
-</div><div class="formactions"><button type="button" class="outline" data-close="sellModal">Cancel</button><button class="primary" type="submit" id="publishButton">Publish listing</button></div><p id="listingMessage" class="muted" role="status" aria-live="polite"></p></form></div></div>
-
+  <p id="listingMessage" class="muted" role="status" aria-live="polite">
+  </p>
+</form>
+</div>
+</div>
 <script>
 'use strict';
 const CATS=['All items','Electronics','Fashion','Home & Furniture','Phones & Accessories','Books & Education','Baby & Kids','Beauty','Sports & Outdoors','Vehicles','Other'];
 const SYMBOLS={NGN:'₦',USD:'$',GBP:'£',EUR:'€',GHS:'₵',KES:'KSh ',ZAR:'R'};
-let client=null,user=null,items=[],cat='All items',authSubscription=null;
+let client=null,user=null,items=[],cat='All items',toastTimer=null,currentDetail=null;
 const $=id=>document.getElementById(id);
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function money(x){const amount=Number(x.price);return (SYMBOLS[x.currency]||'')+(Number.isFinite(amount)?amount.toLocaleString(undefined,{maximumFractionDigits:2}):'—')}
-function openModal(id){$(id).classList.add('open')}
-function closeModal(id){$(id).classList.remove('open')}
-document.querySelectorAll('[data-details]').forEach(b=>b.addEventListener('click',()=>{
-  const x=items.find(z=>String(z.id)===b.dataset.details);
-  if(!x)return;
-  $('detailsTitle').textContent=x.title;
-  $('detailsPrice').textContent=money(x);
-  $('detailsMeta').textContent=x.condition+' · '+x.category+' · '+x.location;
-  $('detailsDescription').textContent=x.description||'No description provided.';
-  const photo=$('detailsPhoto');
-  photo.src=x.image_url||'';
-  photo.hidden=!x.image_url;
-  openModal('detailsModal');
-}));
+function money(x){const n=Number(x.price);return (SYMBOLS[x.currency]||'')+(Number.isFinite(n)?n.toLocaleString(undefined,{maximumFractionDigits:2}):'—')}
+function openModal(id){$(id).classList.add('open')}function closeModal(id){$(id).classList.remove('open')}
+function showToast(message,type='success'){const t=$('toast');$('toastMessage').textContent=message;$('toastIcon').textContent=type==='error'?'!':'✓';t.classList.toggle('error',type==='error');t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),3500)}
+function showSetup(message){$('setupNotice').hidden=false;$('setupNotice').textContent=message}
+document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeModal(b.dataset.close)));
 document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)closeModal(m.id)}));
 document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal.open').forEach(m=>closeModal(m.id))});
-function showSetup(message){$('setupNotice').hidden=false;$('setupNotice').textContent=message}
-function setAuthMessage(message){$('authMessage').textContent=message}
-  
-let toastTimer;
-
-function showToast(message, type = 'success') {
-  const toast = $('toast');
-  $('toastMessage').textContent = message;
-  $('toastIcon').textContent = type === 'error' ? '!' : '✓';
-  toast.classList.toggle('error', type === 'error');
-  toast.classList.add('show');
-
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => {
-    toast.classList.remove('show');
-  }, 3500);
-}
-
+function openContact(x){if(!x)return;let n=String(x.phone||'').replace(/\D/g,'');if(n.startsWith('0'))n='234'+n.slice(1);if(!n){showToast('Seller has not provided a valid contact number.','error');return}const url='https://wa.me/'+n+'?text='+encodeURIComponent('Hello, I saw '+x.title+' on GamadNg Marketplace. Is it available?');const w=window.open(url,'_blank','noopener,noreferrer');if(!w)window.location.href=url}
 function renderCats(){$('cats').innerHTML=CATS.map(c=>`<button type="button" class="chip ${cat===c?'active':''}" data-cat="${esc(c)}">${esc(c)}</button>`).join('');document.querySelectorAll('[data-cat]').forEach(b=>b.addEventListener('click',()=>{cat=b.dataset.cat;renderCats();render()}))}
-async function loadListings(){
- if(!client){items=[];render();return}
- $('count').textContent='Loading listings…';
- try{
-  const {data,error}=await client.from('listings').select('id,title,price,currency,condition,category,location,description,phone,image_url,created_at,seller_id').eq('status','active').order('created_at',{ascending:false}).limit(100);
-  if(error)throw error;
-  items=Array.isArray(data)?data:[];
-  $('setupNotice').hidden=true;
- }catch(error){showSetup('Could not load listings: '+(error.message||String(error))+' Check the Supabase table, policies, and API settings.');items=[]}
- render();
-}
-function render(){
- const q=$('q').value.toLowerCase().trim(),condition=$('condition').value,sort=$('sort').value;
- let a=items.filter(x=>(cat==='All items'||x.category===cat)&&(condition==='All'||x.condition===condition)&&(!q||[x.title,x.category,x.location,x.description].join(' ').toLowerCase().includes(q)));
- a.sort((x,y)=>sort==='low'?Number(x.price)-Number(y.price):sort==='high'?Number(y.price)-Number(x.price):new Date(y.created_at||0)-new Date(x.created_at||0));
- $('count').textContent=a.length+' item(s)';const g=$('grid');
- if(!a.length){g.innerHTML='<div class="empty">No live listings yet. Sign in and publish the first item, or try another search.</div>';return}
- g.innerHTML=a.map(x=>`<article class="card"><div class="pic">${x.image_url?`<img src="${esc(x.image_url)}" alt="${esc(x.title)}" loading="lazy" referrerpolicy="no-referrer">`:esc(({Electronics:'💻',Fashion:'👕','Home & Furniture':'🛋️','Phones & Accessories':'📱','Books & Education':'📚','Baby & Kids':'🧸',Beauty:'🧴','Sports & Outdoors':'⚽',Vehicles:'🚲',Other:'📦'})[x.category]||'📦')}<span class="badge">${esc(x.condition)}</span></div><div class="body"><div class="muted">${esc(x.category)}</div><b>${esc(x.title)}</b><div class="price">${money(x)}</div><div class="muted">📍 ${esc(x.location)}</div><div class="actions"><button type="button" class="outline" data-details="${esc(x.id)}">Details</button><button type="button" class="primary" data-contact="${esc(x.id)}">Contact seller</button></div></div></article>`).join('');
- document.querySelectorAll('[data-details]').forEach(b=>b.addEventListener('click',()=>{const x=items.find(z=>String(z.id)===b.dataset.details);if(x)alert(`${x.title}\n${money(x)} · ${x.condition}\n${x.category} · ${x.location}\n\n${x.description}`)}));
- document.querySelectorAll('[data-contact]').forEach(b=>b.addEventListener('click',()=>{const x=items.find(z=>String(z.id)===b.dataset.contact);if(!x)return;let n=String(x.phone||'').replace(/\D/g,'');if(n.startsWith('0'))n='234'+n.slice(1);if(!n){alert('Seller has not provided a valid contact number.');return}if(confirm('You will contact the seller directly. Verify the item and seller before paying. Continue to WhatsApp?'))window.open('https://wa.me/'+n+'?text='+encodeURIComponent('Hello, I saw '+x.title+' on GamadNg Marketplace. Is it available?'),'_blank','noopener,noreferrer')}));
-}
-async function updateAuth(){
- // Explicitly show the sign-in control regardless of any stale hidden attribute.
- $('authButton').hidden=false;
- if(!client){$('authStatus').textContent='Supabase setup required';$('signOut').hidden=true;return}
- try{
-  const {data,error}=await client.auth.getSession();
-  if(error)throw error;
-  user=data.session?.user||null;
-  $('authStatus').textContent=user?'Signed in: '+user.email:'Browse listings · Sign in to sell';
-  $('authButton').hidden=false;
-  $('signOut').hidden=!user;
- }catch(error){$('authStatus').textContent='Could not check sign-in status';$('authButton').hidden=false;$('signOut').hidden=true;showSetup('Could not check your sign-in status: '+(error.message||String(error)))}
-}
-$('authButton').addEventListener('click',()=>{setAuthMessage('');openModal('authModal')});
-$('signOut').addEventListener('click',async()=>{if(!client)return;const {error}=await client.auth.signOut();if(error){alert('Could not sign out: '+error.message);return}await updateAuth();alert('Signed out.')});
-$('registerButton').addEventListener('click',async()=>{
- if(!client){setAuthMessage('Supabase is not configured. Check config.js.');return}
- const f=new FormData($('authForm')),email=String(f.get('email')||'').trim(),password=String(f.get('password')||'');
- if(!email||password.length<8){setAuthMessage('Enter a valid email and a password of at least 8 characters.');return}
- const b=$('registerButton');b.disabled=true;setAuthMessage('Creating account…');
- try{const {data,error}=await client.auth.signUp({email,password});if(error)throw error;setAuthMessage(data.session?'Account created and signed in.':'Account created. Check your email for a confirmation link.');if(data.session){await updateAuth();setTimeout(()=>closeModal('authModal'),700)}}catch(error){setAuthMessage(error.message||String(error))}finally{b.disabled=false}
-});
-$('authForm').addEventListener('submit',async e=>{
- e.preventDefault();if(!client){setAuthMessage('Supabase is not configured. Check config.js.');return}
- const f=new FormData(e.currentTarget),email=String(f.get('email')||'').trim(),password=String(f.get('password')||'');const b=e.currentTarget.querySelector('button[type="submit"]');b.disabled=true;setAuthMessage('Signing in…');
- try{const {error}=await client.auth.signInWithPassword({email,password});if(error)throw error;setAuthMessage('Signed in successfully.');await updateAuth();setTimeout(()=>closeModal('authModal'),700)}catch(error){setAuthMessage(error.message||String(error))}finally{b.disabled=false}
-});
-function openSell(){if(!client){showSetup('Supabase is not configured yet. Check config.js and the Supabase project settings.');return}if(!user){openModal('authModal');setAuthMessage('Please sign in or create an account before listing an item.');return}$('listingMessage').textContent='';openModal('sellModal')}
+async function loadListings(){if(!client){items=[];render();return}$('count').textContent='Loading listings…';try{const {data,error}=await client.from('listings').select('id,title,price,currency,condition,category,location,description,phone,image_url,created_at,seller_id').eq('status','active').order('created_at',{ascending:false}).limit(100);if(error)throw error;items=Array.isArray(data)?data:[];$('setupNotice').hidden=true}catch(error){showSetup('Could not load listings: '+(error.message||String(error))+' Check the Supabase table, policies, and API settings.');items=[]}render()}
+function showDetails(x){currentDetail=x;$('detailsTitle').textContent=x.title;$('detailsPrice').textContent=money(x);$('detailsMeta').textContent=[x.condition,x.category,x.location].filter(Boolean).join(' · ');$('detailsDescription').textContent=x.description||'No description provided.';const p=$('detailsPhoto');if(x.image_url){p.src=x.image_url;p.hidden=false}else{p.removeAttribute('src');p.hidden=true}openModal('detailsModal')}
+$('detailsContact').addEventListener('click',()=>openContact(currentDetail));
+function render(){const q=$('q').value.toLowerCase().trim(),condition=$('condition').value,sort=$('sort').value;let a=items.filter(x=>(cat==='All items'||x.category===cat)&&(condition==='All'||x.condition===condition)&&(!q||[x.title,x.category,x.location,x.description].join(' ').toLowerCase().includes(q)));a.sort((x,y)=>sort==='low'?Number(x.price)-Number(y.price):sort==='high'?Number(y.price)-Number(x.price):new Date(y.created_at||0)-new Date(x.created_at||0));$('count').textContent=a.length+' item(s)';const g=$('grid');if(!a.length){g.innerHTML='<div class="empty">No live listings yet. Sign in and publish the first item, or try another search.</div>';return}g.innerHTML=a.map(x=>`<article class="card"><div class="pic">${x.image_url?`<img src="${esc(x.image_url)}" alt="${esc(x.title)}" loading="lazy" referrerpolicy="no-referrer">`:esc(({Electronics:'💻',Fashion:'👕','Home & Furniture':'🛋️','Phones & Accessories':'📱','Books & Education':'📚','Baby & Kids':'🧸',Beauty:'🧴','Sports & Outdoors':'⚽',Vehicles:'🚲',Other:'📦'})[x.category]||'📦')}<span class="badge">${esc(x.condition)}</span></div><div class="body"><div class="muted">${esc(x.category)}</div><b>${esc(x.title)}</b><div class="price">${money(x)}</div><div class="muted">📍 ${esc(x.location)}</div><div class="actions"><button type="button" class="outline" data-details="${esc(x.id)}">Details</button><button type="button" class="primary" data-contact="${esc(x.id)}">Contact seller</button></div></div></article>`).join('');document.querySelectorAll('[data-details]').forEach(b=>b.addEventListener('click',()=>{const x=items.find(z=>String(z.id)===b.dataset.details);if(x)showDetails(x)}));document.querySelectorAll('[data-contact]').forEach(b=>b.addEventListener('click',()=>openContact(items.find(z=>String(z.id)===b.dataset.contact))))}
+async function updateAuth(){$('authButton').hidden=false;if(!client){$('authStatus').textContent='Supabase setup required';$('signOut').hidden=true;return}try{const {data,error}=await client.auth.getSession();if(error)throw error;user=data.session?.user||null;$('authStatus').textContent=user?'Signed in: '+user.email:'Browse listings · Sign in to sell';$('signOut').hidden=!user}catch(error){$('authStatus').textContent='Could not check sign-in status';$('signOut').hidden=true;showSetup('Could not check your sign-in status: '+(error.message||String(error)))}}
+$('authButton').addEventListener('click',()=>{$('authMessage').textContent='';openModal('authModal')});
+$('signOut').addEventListener('click',async()=>{if(!client)return;const {error}=await client.auth.signOut();if(error){showToast('Could not sign out: '+error.message,'error');return}await updateAuth();showToast('You have signed out.')});
+$('registerButton').addEventListener('click',async()=>{if(!client){$('authMessage').textContent='Supabase is not configured. Check config.js.';return}const f=new FormData($('authForm')),email=String(f.get('email')||'').trim(),password=String(f.get('password')||'');if(!email||password.length<8){$('authMessage').textContent='Enter a valid email and a password of at least 8 characters.';return}const b=$('registerButton');b.disabled=true;$('authMessage').textContent='Creating account…';try{const {data,error}=await client.auth.signUp({email,password});if(error)throw error;$('authMessage').textContent=data.session?'Account created and signed in.':'Account created. Check your email for a confirmation link.';if(data.session){await updateAuth();setTimeout(()=>closeModal('authModal'),700)}}catch(error){$('authMessage').textContent=error.message||String(error)}finally{b.disabled=false}});
+$('authForm').addEventListener('submit',async e=>{e.preventDefault();if(!client){$('authMessage').textContent='Supabase is not configured. Check config.js.';return}const f=new FormData(e.currentTarget),email=String(f.get('email')||'').trim(),password=String(f.get('password')||''),b=e.currentTarget.querySelector('button[type="submit"]');b.disabled=true;$('authMessage').textContent='Signing in…';try{const {error}=await client.auth.signInWithPassword({email,password});if(error)throw error;$('authMessage').textContent='Signed in successfully.';await updateAuth();setTimeout(()=>closeModal('authModal'),700)}catch(error){$('authMessage').textContent=error.message||String(error)}finally{b.disabled=false}});
+function openSell(){if(!client){showSetup('Supabase is not configured yet. Check config.js and Supabase project settings.');return}if(!user){openModal('authModal');$('authMessage').textContent='Please sign in or create an account before listing an item.';return}$('listingMessage').textContent='';openModal('sellModal')}
 $('sellTop').addEventListener('click',openSell);$('sellHero').addEventListener('click',openSell);$('search').addEventListener('click',render);$('q').addEventListener('keydown',e=>{if(e.key==='Enter')render()});$('condition').addEventListener('change',render);$('sort').addEventListener('change',render);
-$('listingForm').addEventListener('submit',async e=>{
- e.preventDefault();if(!client||!user){$('listingMessage').textContent='Please sign in first.';return}
- const f=e.currentTarget,d=new FormData(f),file=$('photo').files[0],publish=$('publishButton');publish.disabled=true;$('listingMessage').textContent='Publishing listing…';
- let uploadedPath=null;
- try{
-  let image_url=null;
-  if(file){
-   if(file.size>5*1024*1024)throw new Error('Choose an image smaller than 5 MB.');
-   if(!file.type.startsWith('image/'))throw new Error('Please choose an image file.');
-   const ext=(file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'')||'jpg';
-   const path=user.id+'/'+crypto.randomUUID()+'.'+ext;
-   const {error:upErr}=await client.storage.from('listing-images').upload(path,file,{upsert:false,contentType:file.type});if(upErr)throw upErr;
-   uploadedPath=path;
-   const {data:urlData}=client.storage.from('listing-images').getPublicUrl(path);image_url=urlData?.publicUrl||null;
-  }
-  const row={seller_id:user.id,title:String(d.get('title')||'').trim(),price:Number(d.get('price')),currency:d.get('currency'),condition:d.get('condition'),category:d.get('category'),location:String(d.get('location')||'').trim(),phone:String(d.get('phone')||'').trim(),description:String(d.get('description')||'').trim(),image_url,status:'active'};
-  if(!row.title||!Number.isFinite(row.price)||row.price<0||!row.location||!row.phone||!row.description)throw new Error('Please complete all required fields correctly.');
-  const {error}=await client.from('listings').insert(row);if(error)throw error;
-  closeModal('sellModal');f.reset();await loadListings();showToast('Your listing is live! 🎉');
- }catch(error){$('listingMessage').textContent='Could not publish: '+(error.message||String(error));if(uploadedPath){try{await client.storage.from('listing-images').remove([uploadedPath])}catch(cleanupError){/* Keep the original error visible. */}}}
- finally{publish.disabled=false}
-});
-async function init(){
- // Do not rely only on CSS: restore visibility on initial page load too.
- $('authButton').hidden=false;
- const cfg=window.GAMADNG_SUPABASE||{};
- if(!cfg.url||!cfg.anonKey||String(cfg.url).includes('YOUR_PROJECT')||String(cfg.anonKey).includes('YOUR_SUPABASE')){
-  showSetup('Supabase is not connected yet. Add your project URL and publishable/anon key to config.js. Do not use a service-role key in a browser.');
-  $('authStatus').textContent='Supabase setup required';renderCats();render();return;
- }
- if(!window.supabase){showSetup('The Supabase library did not load. Check your internet connection and reload the page.');$('authStatus').textContent='Supabase library unavailable';renderCats();render();return}
- try{
-  client=window.supabase.createClient(cfg.url,cfg.anonKey);
-  const result=client.auth.onAuthStateChange((_event,session)=>{
-   // Defer UI work so auth callbacks do not block Supabase auth processing.
-   Promise.resolve().then(()=>{user=session?.user||null;return updateAuth()}).catch(()=>{ $('authButton').hidden=false; });
-  });
-  authSubscription=result?.data?.subscription||null;
-  await updateAuth();renderCats();await loadListings();
- }catch(error){showSetup('Marketplace initialization failed: '+(error.message||String(error)));$('authStatus').textContent='Marketplace setup error';$('authButton').hidden=false;renderCats();render()}
-}
-window.addEventListener('pageshow',()=>{$('authButton').hidden=false});
-init();
+$('listingForm').addEventListener('submit',async e=>{e.preventDefault();if(!client||!user){$('listingMessage').textContent='Please sign in first.';return}const f=e.currentTarget,d=new FormData(f),file=$('photo').files[0],publish=$('publishButton');publish.disabled=true;$('listingMessage').textContent='Publishing listing…';let uploadedPath=null;try{let image_url=null;if(file){if(file.size>5*1024*1024)throw new Error('Choose an image smaller than 5 MB.');if(!file.type.startsWith('image/'))throw new Error('Please choose an image file.');const ext=(file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'')||'jpg',path=user.id+'/'+crypto.randomUUID()+'.'+ext;const {error:upErr}=await client.storage.from('listing-images').upload(path,file,{upsert:false,contentType:file.type});if(upErr)throw upErr;uploadedPath=path;const {data:urlData}=client.storage.from('listing-images').getPublicUrl(path);image_url=urlData?.publicUrl||null}const row={seller_id:user.id,title:String(d.get('title')||'').trim(),price:Number(d.get('price')),currency:d.get('currency'),condition:d.get('condition'),category:d.get('category'),location:String(d.get('location')||'').trim(),phone:String(d.get('phone')||'').trim(),description:String(d.get('description')||'').trim(),image_url,status:'active'};if(!row.title||!Number.isFinite(row.price)||row.price<0||!row.location||!row.phone||!row.description)throw new Error('Please complete all required fields correctly.');const {error}=await client.from('listings').insert(row);if(error)throw error;closeModal('sellModal');f.reset();await loadListings();showToast('Your listing is live! 🎉')}catch(error){$('listingMessage').textContent='Could not publish: '+(error.message||String(error));if(uploadedPath){try{await client.storage.from('listing-images').remove([uploadedPath])}catch(_){}}}finally{publish.disabled=false}});
+async function init(){$('authButton').hidden=false;const cfg=window.GAMADNG_SUPABASE||{};if(!cfg.url||!cfg.anonKey||String(cfg.url).includes('YOUR_PROJECT')||String(cfg.anonKey).includes('YOUR_SUPABASE')){showSetup('Supabase is not connected yet. Add your project URL and publishable/anon key to config.js. Do not use a service-role key in a browser.');$('authStatus').textContent='Supabase setup required';renderCats();render();return}if(!window.supabase){showSetup('The Supabase library did not load. Check your internet connection and reload the page.');$('authStatus').textContent='Supabase library unavailable';renderCats();render();return}try{client=window.supabase.createClient(cfg.url,cfg.anonKey);client.auth.onAuthStateChange((_event,session)=>{Promise.resolve().then(()=>{user=session?.user||null;return updateAuth()}).catch(()=>$('authButton').hidden=false)});await updateAuth();renderCats();await loadListings()}catch(error){showSetup('Marketplace initialization failed: '+(error.message||String(error)));$('authStatus').textContent='Marketplace setup error';renderCats();render()}}
+window.addEventListener('pageshow',()=>$('authButton').hidden=false);init();
 </script>
 </body>
 </html>
