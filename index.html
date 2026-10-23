@@ -118,6 +118,8 @@ footer{text-align:center;color:var(--muted);padding:25px;font-size:13px}.status{
           <button type="button" class="outline" data-close="detailsModal">Close</button>
           <button type="button" class="primary" id="detailsContact">Contact seller on WhatsApp</button>
         </div>
+      </div>
+    </div>
     <div class="modal" id="sellModal" role="dialog" aria-modal="true" aria-labelledby="sellTitle">
       <div class="panel">
         <h2 id="sellTitle">List an item</h2>
@@ -176,7 +178,8 @@ footer{text-align:center;color:var(--muted);padding:25px;font-size:13px}.status{
   <p id="listingMessage" class="muted" role="status" aria-live="polite">
   </p>
 </form>
-      </div>
+</div>
+</div>
 <script>
 'use strict';
 const CATS=['All items','Electronics','Fashion','Home & Furniture','Phones & Accessories','Books & Education','Baby & Kids','Beauty','Sports & Outdoors','Vehicles','Other'];
@@ -205,111 +208,6 @@ $('authForm').addEventListener('submit',async e=>{e.preventDefault();if(!client)
 function openSell(){if(!client){showSetup('Supabase is not configured yet. Check config.js and Supabase project settings.');return}if(!user){openModal('authModal');$('authMessage').textContent='Please sign in or create an account before listing an item.';return}$('listingMessage').textContent='';openModal('sellModal')}
 $('sellTop').addEventListener('click',openSell);$('sellHero').addEventListener('click',openSell);$('search').addEventListener('click',render);$('q').addEventListener('keydown',e=>{if(e.key==='Enter')render()});$('condition').addEventListener('change',render);$('sort').addEventListener('change',render);
 let photoPreviewUrl=null;$('photo').addEventListener('change',()=>{const file=$('photo').files[0],preview=$('photoPreview');if(photoPreviewUrl){URL.revokeObjectURL(photoPreviewUrl);photoPreviewUrl=null}if(!file){preview.style.display='none';preview.removeAttribute('src');return}if(!file.type.startsWith('image/')||file.size>5*1024*1024){preview.style.display='none';preview.removeAttribute('src');showToast(file.size>5*1024*1024?'Choose an image smaller than 5 MB.':'Please choose an image file.','error');$('photo').value='';return}photoPreviewUrl=URL.createObjectURL(file);preview.src=photoPreviewUrl;preview.style.display='block'});$('listingForm').addEventListener('submit',async e=>{e.preventDefault();if(!client||!user){$('listingMessage').textContent='Please sign in first.';return}const f=e.currentTarget,d=new FormData(f),file=$('photo').files[0],publish=$('publishButton');publish.disabled=true;$('listingMessage').textContent='Publishing listing…';let uploadedPath=null;try{let image_url=null;if(file){if(file.size>5*1024*1024)throw new Error('Choose an image smaller than 5 MB.');if(!file.type.startsWith('image/'))throw new Error('Please choose an image file.');const ext=(file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'')||'jpg',path=user.id+'/'+crypto.randomUUID()+'.'+ext;const {error:upErr}=await client.storage.from('listing-images').upload(path,file,{upsert:false,contentType:file.type});if(upErr)throw upErr;uploadedPath=path;const {data:urlData}=client.storage.from('listing-images').getPublicUrl(path);image_url=urlData?.publicUrl||null}const row={seller_id:user.id,title:String(d.get('title')||'').trim(),price:Number(d.get('price')),currency:d.get('currency'),condition:d.get('condition'),category:d.get('category'),location:String(d.get('location')||'').trim(),phone:String(d.get('phone')||'').trim(),description:String(d.get('description')||'').trim(),image_url,status:'active'};if(!row.title||!Number.isFinite(row.price)||row.price<0||!row.location||!row.phone||!row.description)throw new Error('Please complete all required fields correctly.');const {error}=await client.from('listings').insert(row);if(error)throw error;closeModal('sellModal');f.reset();$('photoPreview').style.display='none';$('photoPreview').removeAttribute('src');if(photoPreviewUrl){URL.revokeObjectURL(photoPreviewUrl);photoPreviewUrl=null}await loadListings();showToast('Your listing is live! 🎉')}catch(error){$('listingMessage').textContent='Could not publish: '+(error.message||String(error));if(uploadedPath){try{await client.storage.from('listing-images').remove([uploadedPath])}catch(_){}}}finally{publish.disabled=false}});
-async function init(){$('authButton').hidden=false;const cfg=window.GAMADNG_SUPABASE||{};if(!cfg.url||!cfg.anonKey||String(cfg.url).includes('YOUR_PROJECT')||String(cfg.anonKey).includes('YOUR_SUPABASE')){showSetup('Supabase is not connected yet. Add your project URL and publishable/anon key to config.js. Do not use a service-role key in a browser.');$('authStatus').textContent='Supabase setup required';renderCats();render();return}if(!window.supabase){showSetup('The Supabase library did not load. Check your internet connection and reload the page.');$('authStatus').textContent='Supabase library unavailable';renderCats();render();return}try{client=window.supabase.createClient(cfg.url,cfg.anonKey);client.auth.onAuthStateChange((_event,session)=>{Promise.resolve().then(()=>{user=session?.user||null;return updateAuth()}).catch(()=>$('authButton').hidden=false)});await updateAuth();renderCats();await loadListings()}catch(error){showSetup('Marketplace initialization failed: '+(error.message||String(error)));$('authStatus').textContent='Marketplace setup error';renderCats();render()}}
-window.addEventListener('pageshow',()=>$('authButton').hidden=false);init();
-</script>
-</body>
-</html>
-      <div class="panel">
-        <img id="detailsPhoto" class="details-photo" alt="Product photo" hidden>
-        <h2 id="detailsTitle">Item details</h2>
-        <p id="detailsPrice" class="price">
-        </p>
-        <p id="detailsMeta" class="muted">
-        </p>
-        <h3>About this item</h3>
-        <p id="detailsDescription" class="details-description">
-        </p>
-        <div class="formactions">
-          <button type="button" class="outline" data-close="detailsModal">Close</button>
-          <button type="button" class="primary" id="detailsContact">Contact seller on WhatsApp</button>
-        </div>
-    <div class="modal" id="sellModal" role="dialog" aria-modal="true" aria-labelledby="sellTitle">
-      <div class="panel">
-        <h2 id="sellTitle">List an item</h2>
-        <p class="muted">Sign in first. Your listing and image will be stored online.</p>
-        <form id="listingForm">
-          <div class="formgrid">
-            <label class="full">Item title *<input name="title" required maxlength="90">
-            </label>
-            <label>Price *<input name="price" type="number" min="0" step="0.01" required>
-            </label>
-            <label>Currency<select name="currency">
-              <option value="NGN">NGN ₦</option>
-              <option value="USD">USD $</option>
-              <option value="GBP">GBP £</option>
-              <option value="EUR">EUR €</option>
-              <option value="GHS">GHS ₵</option>
-              <option value="KES">KES KSh</option>
-              <option value="ZAR">ZAR R</option>
-            </select>
-          </label>
-          <label>Condition<select name="condition">
-            <option>New</option>
-            <option>Used</option>
-            <option>Refurbished</option>
-          </select>
-        </label>
-        <label>Category<select name="category">
-          <option>Electronics</option>
-          <option>Fashion</option>
-          <option>Home &amp; Furniture</option>
-          <option>Phones &amp; Accessories</option>
-          <option>Books &amp; Education</option>
-          <option>Baby &amp; Kids</option>
-          <option>Beauty</option>
-          <option>Sports &amp; Outdoors</option>
-          <option>Vehicles</option>
-          <option>Other</option>
-        </select>
-      </label>
-      <label>Location *<input name="location" required maxlength="120" placeholder="City, country">
-      </label>
-      <label>WhatsApp number *<input name="phone" required maxlength="30" type="tel" placeholder="+2348012345678">
-      </label>
-      <label class="full">Description *<textarea name="description" required rows="3" maxlength="2000">
-      </textarea>
-    </label>
-    <label class="full">Product photo (optional)<input type="file" name="photo" id="photo" accept="image/*">
-      <span class="muted">Maximum 5 MB.</span>
-    </label>
-  </div>
-  <div class="formactions">
-    <button type="button" class="outline" data-close="sellModal">Cancel</button>
-    <button class="primary" type="submit" id="publishButton">Publish listing</button>
-  </div>
-  <p id="listingMessage" class="muted" role="status" aria-live="polite">
-  </p>
-</form>
-      </div>
-<script>
-'use strict';
-const CATS=['All items','Electronics','Fashion','Home & Furniture','Phones & Accessories','Books & Education','Baby & Kids','Beauty','Sports & Outdoors','Vehicles','Other'];
-const SYMBOLS={NGN:'₦',USD:'$',GBP:'£',EUR:'€',GHS:'₵',KES:'KSh ',ZAR:'R'};
-let client=null,user=null,items=[],cat='All items',toastTimer=null,currentDetail=null;
-const $=id=>document.getElementById(id);
-function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function money(x){const n=Number(x.price);return (SYMBOLS[x.currency]||'')+(Number.isFinite(n)?n.toLocaleString(undefined,{maximumFractionDigits:2}):'—')}
-function openModal(id){$(id).classList.add('open')}function closeModal(id){$(id).classList.remove('open')}
-function showToast(message,type='success'){const t=$('toast');$('toastMessage').textContent=message;$('toastIcon').textContent=type==='error'?'!':'✓';t.classList.toggle('error',type==='error');t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),3500)}
-function showSetup(message){$('setupNotice').hidden=false;$('setupNotice').textContent=message}
-document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeModal(b.dataset.close)));
-document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)closeModal(m.id)}));
-document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal.open').forEach(m=>closeModal(m.id))});
-function openContact(x){if(!x)return;let n=String(x.phone||'').replace(/\D/g,'');if(n.startsWith('0'))n='234'+n.slice(1);if(!n){showToast('Seller has not provided a valid contact number.','error');return}const url='https://wa.me/'+n+'?text='+encodeURIComponent('Hello, I saw '+x.title+' on GamadNg Marketplace. Is it available?');const w=window.open(url,'_blank','noopener,noreferrer');if(!w)window.location.href=url}
-function renderCats(){$('cats').innerHTML=CATS.map(c=>`<button type="button" class="chip ${cat===c?'active':''}" data-cat="${esc(c)}">${esc(c)}</button>`).join('');document.querySelectorAll('[data-cat]').forEach(b=>b.addEventListener('click',()=>{cat=b.dataset.cat;renderCats();render()}))}
-async function loadListings(){if(!client){items=[];render();return}$('count').textContent='Loading listings…';try{const {data,error}=await client.from('listings').select('id,title,price,currency,condition,category,location,description,phone,image_url,created_at,seller_id').eq('status','active').order('created_at',{ascending:false}).limit(100);if(error)throw error;items=Array.isArray(data)?data:[];$('setupNotice').hidden=true}catch(error){showSetup('Could not load listings: '+(error.message||String(error))+' Check the Supabase table, policies, and API settings.');items=[]}render()}
-function showDetails(x){currentDetail=x;$('detailsTitle').textContent=x.title;$('detailsPrice').textContent=money(x);$('detailsMeta').textContent=[x.condition,x.category,x.location].filter(Boolean).join(' · ');$('detailsDescription').textContent=x.description||'No description provided.';const p=$('detailsPhoto');if(x.image_url){p.src=x.image_url;p.hidden=false}else{p.removeAttribute('src');p.hidden=true}openModal('detailsModal')}
-$('detailsContact').addEventListener('click',()=>openContact(currentDetail));
-function render(){const q=$('q').value.toLowerCase().trim(),condition=$('condition').value,sort=$('sort').value;let a=items.filter(x=>(cat==='All items'||x.category===cat)&&(condition==='All'||x.condition===condition)&&(!q||[x.title,x.category,x.location,x.description].join(' ').toLowerCase().includes(q)));a.sort((x,y)=>sort==='low'?Number(x.price)-Number(y.price):sort==='high'?Number(y.price)-Number(x.price):new Date(y.created_at||0)-new Date(x.created_at||0));$('count').textContent=a.length+' item(s)';const g=$('grid');if(!a.length){g.innerHTML='<div class="empty">No live listings yet. Sign in and publish the first item, or try another search.</div>';return}g.innerHTML=a.map(x=>`<article class="card"><div class="pic">${x.image_url?`<img src="${esc(x.image_url)}" alt="${esc(x.title)}" loading="lazy" referrerpolicy="no-referrer">`:esc(({Electronics:'💻',Fashion:'👕','Home & Furniture':'🛋️','Phones & Accessories':'📱','Books & Education':'📚','Baby & Kids':'🧸',Beauty:'🧴','Sports & Outdoors':'⚽',Vehicles:'🚲',Other:'📦'})[x.category]||'📦')}<span class="badge">${esc(x.condition)}</span></div><div class="body"><div class="muted">${esc(x.category)}</div><b>${esc(x.title)}</b><div class="price">${money(x)}</div><div class="muted">📍 ${esc(x.location)}</div><div class="actions"><button type="button" class="outline" data-details="${esc(x.id)}">Details</button><button type="button" class="primary" data-contact="${esc(x.id)}">Contact seller</button></div></div></article>`).join('');document.querySelectorAll('[data-details]').forEach(b=>b.addEventListener('click',()=>{const x=items.find(z=>String(z.id)===b.dataset.details);if(x)showDetails(x)}));document.querySelectorAll('[data-contact]').forEach(b=>b.addEventListener('click',()=>openContact(items.find(z=>String(z.id)===b.dataset.contact))))}
-async function updateAuth(){$('authButton').hidden=false;if(!client){$('authStatus').textContent='Supabase setup required';$('signOut').hidden=true;return}try{const {data,error}=await client.auth.getSession();if(error)throw error;user=data.session?.user||null;$('authStatus').textContent=user?'Signed in: '+user.email:'Browse listings · Sign in to sell';$('signOut').hidden=!user}catch(error){$('authStatus').textContent='Could not check sign-in status';$('signOut').hidden=true;showSetup('Could not check your sign-in status: '+(error.message||String(error)))}}
-$('authButton').addEventListener('click',()=>{$('authMessage').textContent='';openModal('authModal')});
-$('signOut').addEventListener('click',async()=>{if(!client)return;const {error}=await client.auth.signOut();if(error){showToast('Could not sign out: '+error.message,'error');return}await updateAuth();showToast('You have signed out.')});
-$('registerButton').addEventListener('click',async()=>{if(!client){$('authMessage').textContent='Supabase is not configured. Check config.js.';return}const f=new FormData($('authForm')),email=String(f.get('email')||'').trim(),password=String(f.get('password')||'');if(!email||password.length<8){$('authMessage').textContent='Enter a valid email and a password of at least 8 characters.';return}const b=$('registerButton');b.disabled=true;$('authMessage').textContent='Creating account…';try{const {data,error}=await client.auth.signUp({email,password});if(error)throw error;$('authMessage').textContent=data.session?'Account created and signed in.':'Account created. Check your email for a confirmation link.';if(data.session){await updateAuth();setTimeout(()=>closeModal('authModal'),700)}}catch(error){$('authMessage').textContent=error.message||String(error)}finally{b.disabled=false}});
-$('authForm').addEventListener('submit',async e=>{e.preventDefault();if(!client){$('authMessage').textContent='Supabase is not configured. Check config.js.';return}const f=new FormData(e.currentTarget),email=String(f.get('email')||'').trim(),password=String(f.get('password')||''),b=e.currentTarget.querySelector('button[type="submit"]');b.disabled=true;$('authMessage').textContent='Signing in…';try{const {error}=await client.auth.signInWithPassword({email,password});if(error)throw error;$('authMessage').textContent='Signed in successfully.';await updateAuth();setTimeout(()=>closeModal('authModal'),700)}catch(error){$('authMessage').textContent=error.message||String(error)}finally{b.disabled=false}});
-function openSell(){if(!client){showSetup('Supabase is not configured yet. Check config.js and Supabase project settings.');return}if(!user){openModal('authModal');$('authMessage').textContent='Please sign in or create an account before listing an item.';return}$('listingMessage').textContent='';openModal('sellModal')}
-$('sellTop').addEventListener('click',openSell);$('sellHero').addEventListener('click',openSell);$('search').addEventListener('click',render);$('q').addEventListener('keydown',e=>{if(e.key==='Enter')render()});$('condition').addEventListener('change',render);$('sort').addEventListener('change',render);
-$('listingForm').addEventListener('submit',async e=>{e.preventDefault();if(!client||!user){$('listingMessage').textContent='Please sign in first.';return}const f=e.currentTarget,d=new FormData(f),file=$('photo').files[0],publish=$('publishButton');publish.disabled=true;$('listingMessage').textContent='Publishing listing…';let uploadedPath=null;try{let image_url=null;if(file){if(file.size>5*1024*1024)throw new Error('Choose an image smaller than 5 MB.');if(!file.type.startsWith('image/'))throw new Error('Please choose an image file.');const ext=(file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'')||'jpg',path=user.id+'/'+crypto.randomUUID()+'.'+ext;const {error:upErr}=await client.storage.from('listing-images').upload(path,file,{upsert:false,contentType:file.type});if(upErr)throw upErr;uploadedPath=path;const {data:urlData}=client.storage.from('listing-images').getPublicUrl(path);image_url=urlData?.publicUrl||null}const row={seller_id:user.id,title:String(d.get('title')||'').trim(),price:Number(d.get('price')),currency:d.get('currency'),condition:d.get('condition'),category:d.get('category'),location:String(d.get('location')||'').trim(),phone:String(d.get('phone')||'').trim(),description:String(d.get('description')||'').trim(),image_url,status:'active'};if(!row.title||!Number.isFinite(row.price)||row.price<0||!row.location||!row.phone||!row.description)throw new Error('Please complete all required fields correctly.');const {error}=await client.from('listings').insert(row);if(error)throw error;closeModal('sellModal');f.reset();await loadListings();showToast('Your listing is live! 🎉')}catch(error){$('listingMessage').textContent='Could not publish: '+(error.message||String(error));if(uploadedPath){try{await client.storage.from('listing-images').remove([uploadedPath])}catch(_){}}}finally{publish.disabled=false}});
 async function init(){$('authButton').hidden=false;const cfg=window.GAMADNG_SUPABASE||{};if(!cfg.url||!cfg.anonKey||String(cfg.url).includes('YOUR_PROJECT')||String(cfg.anonKey).includes('YOUR_SUPABASE')){showSetup('Supabase is not connected yet. Add your project URL and publishable/anon key to config.js. Do not use a service-role key in a browser.');$('authStatus').textContent='Supabase setup required';renderCats();render();return}if(!window.supabase){showSetup('The Supabase library did not load. Check your internet connection and reload the page.');$('authStatus').textContent='Supabase library unavailable';renderCats();render();return}try{client=window.supabase.createClient(cfg.url,cfg.anonKey);client.auth.onAuthStateChange((_event,session)=>{Promise.resolve().then(()=>{user=session?.user||null;return updateAuth()}).catch(()=>$('authButton').hidden=false)});await updateAuth();renderCats();await loadListings()}catch(error){showSetup('Marketplace initialization failed: '+(error.message||String(error)));$('authStatus').textContent='Marketplace setup error';renderCats();render()}}
 window.addEventListener('pageshow',()=>$('authButton').hidden=false);init();
 </script>
