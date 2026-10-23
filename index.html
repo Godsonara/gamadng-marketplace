@@ -6,70 +6,49 @@
     <meta name="theme-color" content="#126b52">
     <title>GamadNg Marketplace</title>
     <style>
-:root{--g:#116149;--g-dark:#0b4937;--accent:#e7f5ec;--bg:#f6f8f6;--line:#e2e9e4;--ink:#17231e;--muted:#65736c;--surface:#ffffff;--shadow:0 8px 24px rgba(18,54,37,.07)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);font:16px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:var(--ink)}
-header{background:linear-gradient(125deg,var(--g-dark),var(--g));color:white;padding:18px max(16px,calc((100% - 1100px)/2));display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;box-shadow:0 3px 14px #092e201c}
-h1{font-size:23px;letter-spacing:-.5px;margin:0}.tag{font-size:12px;margin-top:5px;opacity:.9}button{border:0;border-radius:11px;padding:11px 14px;font-weight:700;cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s}button:active{transform:scale(.98)}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #8cc8a7;outline-offset:2px}button:disabled{opacity:.65;cursor:wait}
-.primary{background:var(--g);color:white;box-shadow:0 3px 8px #11614920}.primary:hover{background:var(--g-dark)}.light{background:white;color:var(--g)}.outline{background:white;border:1px solid var(--line);color:var(--ink)}.outline:hover,.chip:hover{border-color:#a8c8b4;background:#f7fbf8}
-#authButton{display:inline-flex!important;visibility:visible!important;opacity:1!important;align-items:center;justify-content:center}#authButton[hidden]{display:inline-flex!important}
-main{max-width:1100px;margin:auto;padding:24px 20px}.hero{background:radial-gradient(circle at 90% 10%,#d3ebdc 0,transparent 34%),linear-gradient(125deg,#e8f5ec,#f2f8f3);padding:30px;border:1px solid #d9eade;border-radius:22px;margin-bottom:22px;box-shadow:var(--shadow)}.hero h2{font-size:clamp(28px,4vw,40px);line-height:1.12;letter-spacing:-1px;margin:0 0 12px;max-width:560px}.hero p{max-width:610px;color:#435b4d;margin:0 0 20px}
-.search{display:flex;gap:8px;margin-bottom:12px}.search input{flex:1;min-width:0}input,select,textarea{padding:12px 13px;border:1px solid var(--line);border-radius:11px;font:inherit;background:white;width:100%;min-height:46px;color:var(--ink)}input::placeholder,textarea::placeholder{color:#89958e}
-.chips{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;margin:14px 0;padding:2px 1px 8px;scrollbar-width:thin}.chip{white-space:nowrap;flex:0 0 auto;background:white;border:1px solid var(--line);border-radius:999px;padding:9px 14px;font-size:13px}.chip.active{background:var(--g);border-color:var(--g);color:white;box-shadow:0 3px 8px #11614920}
-.filters{display:flex;gap:10px;margin:12px 0 22px}.filters select{max-width:220px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:17px;overflow:hidden;min-width:0;box-shadow:0 2px 8px rgba(18,54,37,.025);transition:transform .18s,box-shadow .18s,border-color .18s}.card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:#d1e2d6}.pic{aspect-ratio:4/3;min-height:125px;background:linear-gradient(145deg,#eef4ef,#e3eee6);display:grid;place-items:center;font-size:52px;position:relative;overflow:hidden;color:#789183}.pic img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}.card:hover .pic img{transform:scale(1.035)}
-.badge{position:absolute;left:9px;top:9px;background:#ffffffed;color:#24372d;border:1px solid #ffffffb0;border-radius:7px;padding:5px 8px;font-size:11px;font-weight:700;box-shadow:0 2px 6px #0000000b}.body{padding:14px;overflow-wrap:anywhere}.body>b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.35;min-height:2.7em}.price{color:var(--g);font-weight:800;font-size:21px;letter-spacing:-.3px;margin:9px 0}.muted{color:var(--muted);font-size:13px}
-.actions{display:flex;gap:7px;margin-top:13px}.actions button{flex:1;padding:10px 6px;font-size:12px;min-width:0}.empty{padding:34px 20px;text-align:center;background:white;border:1px dashed #cbdacf;border-radius:16px;grid-column:1/-1;color:var(--muted)}
-.notice{padding:12px;background:#fff5d9;border:1px solid #ead79a;border-radius:10px;margin:12px 0;font-size:14px;overflow-wrap:anywhere}
-.modal{display:none;position:fixed;inset:0;background:#0b2118b8;backdrop-filter:blur(3px);align-items:center;justify-content:center;padding:14px;z-index:20}.modal.open{display:flex}.panel{background:white;border:1px solid #e5ece7;border-radius:20px;padding:22px;width:min(620px,100%);max-height:92vh;overflow:auto;box-shadow:0 18px 70px #0003}
-.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{font-size:13px;font-weight:bold;display:grid;gap:6px}.full{grid-column:1/-1}.formactions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px;flex-wrap:wrap}.topbuttons{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-footer{text-align:center;color:var(--muted);padding:25px;font-size:13px}.status{font-size:13px;color:white;margin-top:4px;overflow-wrap:anywhere}
-.toast{position:fixed;left:16px;right:16px;bottom:24px;z-index:9999;display:flex;align-items:center;gap:12px;padding:16px;border-radius:14px;background:#126b52;color:white;box-shadow:0 8px 28px #0003;font-size:15px;line-height:1.5;opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .25s,transform .25s}.toast.show{opacity:1;transform:translateY(0)}.toast.error{background:#a52828}.toast-icon{font-size:22px;font-weight:bold}
-.details-photo{width:100%;max-height:360px;aspect-ratio:16/10;object-fit:contain;border-radius:14px;background:#f2f5f2;margin-bottom:14px;cursor:zoom-in}.details-description{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.75;color:#34483c}.section-heading{display:flex;align-items:end;justify-content:space-between;gap:10px;margin-top:8px}.section-heading h2{margin-bottom:2px}.search{position:relative}.search input{box-shadow:0 2px 8px #163b2610}.search input:focus{border-color:#91bda1}
-@media(max-width:900px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}}@media(max-width:680px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}
-@media(max-width:480px){header{padding:15px 13px;align-items:flex-start}header>div{max-width:100%}.topbuttons{width:100%}.topbuttons button{flex:1;padding:10px 7px;font-size:12px}main{padding:13px 11px}.grid{gap:9px}.pic{aspect-ratio:1/0.88;min-height:105px}.body{padding:10px}.body>b{font-size:14px;min-height:2.6em}.price{font-size:18px;margin:7px 0}.hero{padding:22px 18px;border-radius:18px}.hero h2{font-size:29px}.hero p{font-size:14px}.formgrid{grid-template-columns:1fr}.full{grid-column:1}.filters select{min-width:0;font-size:13px;padding:10px 8px}.filters{gap:7px}.actions{flex-direction:column;gap:6px}.actions button{font-size:12px}.search button{padding:10px}.panel{padding:16px;border-radius:17px}.section-heading{align-items:start;flex-direction:column}}
+:root{--g:#116149;--gd:#0b4937;--accent:#e7f5ec;--bg:#f6f8f6;--line:#e2e9e4;--ink:#17231e;--muted:#65736c;--shadow:0 8px 24px #12362512}*{box-sizing:border-box}body{margin:0;background:var(--bg);font:16px/1.5 system-ui,-apple-system,'Segoe UI',Arial,sans-serif;color:var(--ink)}header{background:linear-gradient(125deg,var(--gd),var(--g));color:white;padding:17px max(14px,calc((100% - 1100px)/2));display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;box-shadow:0 3px 14px #092e201c}h1{font-size:23px;margin:0}.tag,.status{font-size:12px;opacity:.9}.topbuttons{display:flex;gap:8px;flex-wrap:wrap}button{border:0;border-radius:10px;padding:10px 13px;font-weight:700;cursor:pointer}button:disabled{opacity:.6}.primary{background:var(--g);color:white}.light{background:white;color:var(--g)}.outline{background:white;border:1px solid var(--line);color:var(--ink)}main{max-width:1100px;margin:auto;padding:22px 16px}.hero{background:radial-gradient(circle at 90% 10%,#d3ebdc,transparent 34%),linear-gradient(125deg,#e8f5ec,#f2f8f3);padding:26px;border:1px solid #d9eade;border-radius:20px;margin-bottom:20px}.hero h2{font-size:clamp(28px,4vw,40px);line-height:1.12;margin:0 0 10px}.hero p{color:#435b4d}.search{display:flex;gap:8px;margin-bottom:12px}.search input{flex:1;min-width:0}input,select,textarea{padding:11px 12px;border:1px solid var(--line);border-radius:10px;font:inherit;background:white;width:100%;min-height:44px;color:var(--ink)}.chips{display:flex;gap:8px;overflow:auto;margin:13px 0;padding-bottom:6px}.chip{white-space:nowrap;flex:0 0 auto;background:white;border:1px solid var(--line);border-radius:999px;padding:8px 13px;font-size:13px}.chip.active{background:var(--g);color:white}.filters{display:flex;gap:8px;margin:12px 0 20px}.filters select{max-width:220px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.card{background:white;border:1px solid var(--line);border-radius:16px;overflow:hidden;min-width:0;box-shadow:0 2px 8px #12362508}.pic{aspect-ratio:4/3;background:#eaf1eb;display:grid;place-items:center;font-size:46px;position:relative;overflow:hidden}.pic img{width:100%;height:100%;object-fit:cover}.badge{position:absolute;left:8px;top:8px;background:#ffffffed;border-radius:7px;padding:4px 7px;font-size:11px;font-weight:bold}.body{padding:12px;overflow-wrap:anywhere}.body>b{display:block;line-height:1.3;min-height:2.6em}.price{color:var(--g);font-weight:800;font-size:20px;margin:7px 0}.muted{color:var(--muted);font-size:13px}.actions{display:flex;gap:7px;margin-top:11px}.actions button{flex:1;padding:9px 5px;font-size:12px}.seller-mini{font-size:12px;color:var(--muted);margin-top:8px}.stars{color:#c78608;letter-spacing:1px;font-weight:800}.empty{padding:30px;text-align:center;background:white;border:1px dashed #cbdacf;border-radius:14px;grid-column:1/-1;color:var(--muted)}.notice{padding:12px;background:#fff5d9;border:1px solid #ead79a;border-radius:10px;margin:12px 0;font-size:14px;overflow-wrap:anywhere}.modal{display:none;position:fixed;inset:0;background:#0b2118b8;align-items:center;justify-content:center;padding:12px;z-index:20}.modal.open{display:flex}.panel{background:white;border-radius:18px;padding:20px;width:min(650px,100%);max-height:92vh;overflow:auto;box-shadow:0 18px 70px #0003}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}label{font-size:13px;font-weight:700;display:grid;gap:5px}.full{grid-column:1/-1}.formactions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px;flex-wrap:wrap}.details-photo{width:100%;max-height:320px;object-fit:contain;background:#f2f5f2;border-radius:12px;margin-bottom:12px}.details-description{white-space:pre-wrap;overflow-wrap:anywhere}.profile-box,.review-box{border:1px solid var(--line);background:#fbfdfb;border-radius:13px;padding:13px;margin:13px 0}.review{padding:10px 0;border-bottom:1px solid var(--line)}.review:last-child{border-bottom:0}.toast{position:fixed;left:14px;right:14px;bottom:20px;z-index:99;padding:14px;border-radius:12px;background:#126b52;color:white;box-shadow:0 8px 28px #0003;opacity:0;pointer-events:none;transition:.2s}.toast.show{opacity:1}.toast.error{background:#a52828}footer{text-align:center;color:var(--muted);padding:24px;font-size:13px}
+@media(max-width:900px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:680px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}main{padding:13px 10px}.hero{padding:20px 16px}.body{padding:9px}.price{font-size:18px}.actions{flex-direction:column}.topbuttons{width:100%}.topbuttons button{flex:1}.formgrid{grid-template-columns:1fr}.full{grid-column:1}.panel{padding:15px}.filters select{min-width:0;font-size:12px;padding:9px 6px}}
 </style>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="./config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="./config.js"></script>
   </head>
   <body>
     <div id="toast" class="toast" role="status" aria-live="polite">
-      <span id="toastIcon" class="toast-icon">✓</span>
-      <span id="toastMessage">Welcome to GamadNg Marketplace</span>
     </div>
     <header>
       <div>
         <h1>GamadNg Marketplace</h1>
         <div class="tag">Buy new. Buy used. Sell worldwide.</div>
-        <div class="status" id="authStatus" role="status" aria-live="polite">Connecting to marketplace…</div>
+        <div class="status" id="authStatus">Connecting to marketplace…</div>
       </div>
       <div class="topbuttons">
-        <button class="light" id="authButton" type="button">Sign in / Register</button>
-        <button class="light" id="sellTop" type="button">＋ Sell an item</button>
-        <button class="light" id="signOut" type="button" hidden>Sign out</button>
+        <button class="light" id="authButton">Sign in / Register</button>
+        <button class="light" id="sellTop">＋ Sell an item</button>
+        <button class="light" id="profileTop" hidden>My seller profile</button>
+        <button class="light" id="signOut" hidden>Sign out</button>
       </div>
     </header>
     <main>
       <section class="hero">
         <h2>Good finds. Great deals.</h2>
         <p>Discover new and pre-loved items. Contact sellers directly and agree on payment and delivery.</p>
-        <button class="primary" id="sellHero" type="button">Start selling for free</button>
+        <button class="primary" id="sellHero">Start selling for free</button>
       </section>
-      <div id="setupNotice" class="notice" role="status" hidden>
+      <div id="setupNotice" class="notice" hidden>
       </div>
       <div class="search">
         <input id="q" type="search" placeholder="Search products, category or location" aria-label="Search listings">
-        <button class="primary" id="search" type="button">Search</button>
+        <button class="primary" id="search">Search</button>
       </div>
-      <div class="chips" id="cats" aria-label="Categories">
+      <div class="chips" id="cats">
       </div>
       <div class="filters">
-        <select id="condition" aria-label="Filter by condition">
+        <select id="condition">
           <option value="All">New and used</option>
           <option>New</option>
           <option>Used</option>
           <option>Refurbished</option>
         </select>
-        <select id="sort" aria-label="Sort listings">
+        <select id="sort">
           <option value="newest">Newest first</option>
           <option value="low">Price: low to high</option>
           <option value="high">Price: high to low</option>
@@ -82,9 +61,9 @@ footer{text-align:center;color:var(--muted);padding:25px;font-size:13px}.status{
       </section>
     </main>
     <footer>GamadNg Marketplace · Verify the seller and item before paying.</footer>
-    <div class="modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal" id="authModal" role="dialog" aria-modal="true">
       <div class="panel">
-        <h2 id="authTitle">Sign in or register</h2>
+        <h2>Sign in or register</h2>
         <p class="muted">Use an email address you can access. Supabase may send a confirmation email.</p>
         <form id="authForm">
           <div class="formgrid">
@@ -98,12 +77,12 @@ footer{text-align:center;color:var(--muted);padding:25px;font-size:13px}.status{
             <button type="button" class="outline" id="registerButton">Create account</button>
             <button type="submit" class="primary">Sign in</button>
           </div>
-          <p id="authMessage" class="muted" role="status" aria-live="polite">
+          <p id="authMessage" class="muted" role="status">
           </p>
         </form>
       </div>
     </div>
-    <div class="modal" id="detailsModal" role="dialog" aria-modal="true" aria-labelledby="detailsTitle">
+    <div class="modal" id="detailsModal" role="dialog" aria-modal="true">
       <div class="panel">
         <img id="detailsPhoto" class="details-photo" alt="Product photo" hidden>
         <h2 id="detailsTitle">Item details</h2>
@@ -114,102 +93,140 @@ footer{text-align:center;color:var(--muted);padding:25px;font-size:13px}.status{
         <h3>About this item</h3>
         <p id="detailsDescription" class="details-description">
         </p>
-        <div class="formactions">
-          <button type="button" class="outline" data-close="detailsModal">Close</button>
-          <button type="button" class="primary" id="detailsContact">Contact seller on WhatsApp</button>
-        </div>
-      </div>
-    </div>
-    <div class="modal" id="sellModal" role="dialog" aria-modal="true" aria-labelledby="sellTitle">
-      <div class="panel">
-        <h2 id="sellTitle">List an item</h2>
-        <p class="muted">Sign in first. Your listing and image will be stored online.</p>
-        <form id="listingForm">
-          <div class="formgrid">
-            <label class="full">Item title *<input name="title" required maxlength="90">
+        <section class="profile-box">
+          <h3>Seller profile</h3>
+          <div id="detailSeller">Loading seller information…</div>
+          <button class="outline" id="editSellerFromDetails" type="button" hidden>Edit my profile</button>
+        </section>
+        <section class="review-box">
+          <h3>Seller reviews</h3>
+          <div id="reviewSummary" class="muted">Loading ratings…</div>
+          <div id="reviewList">
+          </div>
+          <div id="reviewFormWrap" hidden>
+            <h4>Leave a review</h4>
+            <form id="reviewForm">
+              <label>Rating<select name="rating" required>
+                <option value="5">★★★★★ — Excellent</option>
+                <option value="4">★★★★☆ — Very good</option>
+                <option value="3">★★★☆☆ — Good</option>
+                <option value="2">★★☆☆☆ — Fair</option>
+                <option value="1">★☆☆☆☆ — Poor</option>
+              </select>
             </label>
-            <label>Price *<input name="price" type="number" min="0" step="0.01" required>
-            </label>
-            <label>Currency<select name="currency">
-              <option value="NGN">NGN ₦</option>
-              <option value="USD">USD $</option>
-              <option value="GBP">GBP £</option>
-              <option value="EUR">EUR €</option>
-              <option value="GHS">GHS ₵</option>
-              <option value="KES">KES KSh</option>
-              <option value="ZAR">ZAR R</option>
-            </select>
+            <label style="margin-top:8px">Comment (optional)<textarea name="comment" rows="3" maxlength="1000" placeholder="Share your experience">
+            </textarea>
           </label>
-          <label>Condition<select name="condition">
-            <option>New</option>
-            <option>Used</option>
-            <option>Refurbished</option>
-          </select>
+          <button class="primary" style="margin-top:9px" type="submit" id="submitReview">Submit review</button>
+        </form>
+      </div>
+      <p id="reviewMessage" class="muted">
+      </p>
+    </section>
+    <div class="formactions">
+      <button class="outline" data-close="detailsModal">Close</button>
+      <button class="primary" id="detailsContact">Contact seller on WhatsApp</button>
+    </div>
+  </div>
+</div>
+<div class="modal" id="profileModal" role="dialog" aria-modal="true">
+  <div class="panel">
+    <h2>My seller profile</h2>
+    <p class="muted">Your profile helps buyers learn about you. Your profile is visible publicly.</p>
+    <form id="profileForm">
+      <div class="formgrid">
+        <label class="full">Display name<input name="display_name" maxlength="80" placeholder="Name buyers should see">
         </label>
-        <label>Category<select name="category">
-          <option>Electronics</option>
-          <option>Fashion</option>
-          <option>Home &amp; Furniture</option>
-          <option>Phones &amp; Accessories</option>
-          <option>Books &amp; Education</option>
-          <option>Baby &amp; Kids</option>
-          <option>Beauty</option>
-          <option>Sports &amp; Outdoors</option>
-          <option>Vehicles</option>
-          <option>Other</option>
+        <label class="full">Location<input name="location" maxlength="120" placeholder="City, country">
+        </label>
+        <label class="full">About you<textarea name="bio" maxlength="600" rows="4" placeholder="Tell buyers a little about yourself">
+        </textarea>
+      </label>
+    </div>
+    <div class="formactions">
+      <button class="outline" type="button" data-close="profileModal">Cancel</button>
+      <button class="primary" type="submit" id="saveProfile">Save profile</button>
+    </div>
+    <p id="profileMessage" class="muted">
+    </p>
+  </form>
+</div>
+</div>
+<div class="modal" id="sellModal" role="dialog" aria-modal="true">
+  <div class="panel">
+    <h2>List an item</h2>
+    <p class="muted">Sign in first. Your listing and image will be stored online.</p>
+    <form id="listingForm">
+      <div class="formgrid">
+        <label class="full">Item title *<input name="title" required maxlength="90">
+        </label>
+        <label>Price *<input name="price" type="number" min="0" step="0.01" required>
+        </label>
+        <label>Currency<select name="currency">
+          <option value="NGN">NGN ₦</option>
+          <option value="USD">USD $</option>
+          <option value="GBP">GBP £</option>
+          <option value="EUR">EUR €</option>
+          <option value="GHS">GHS ₵</option>
+          <option value="KES">KES KSh</option>
+          <option value="ZAR">ZAR R</option>
         </select>
       </label>
-      <label>Location *<input name="location" required maxlength="120" placeholder="City, country">
-      </label>
-      <label>WhatsApp number *<input name="phone" required maxlength="30" type="tel" placeholder="+2348012345678">
-      </label>
-      <label class="full">Description *<textarea name="description" required rows="3" maxlength="2000">
-      </textarea>
+      <label>Condition<select name="condition">
+        <option>New</option>
+        <option>Used</option>
+        <option>Refurbished</option>
+      </select>
     </label>
-    <label class="full">Product photo (optional)<input type="file" name="photo" id="photo" accept="image/*">
-      <span class="muted">Maximum 5 MB. Choose a clear, well-lit photo of the item.</span>
-      <img id="photoPreview" alt="Selected product photo preview" style="display:none;width:100%;max-height:220px;object-fit:contain;background:#f2f5f2;border-radius:12px;padding:8px">
-    </label>
-  </div>
-  <div class="formactions">
-    <button type="button" class="outline" data-close="sellModal">Cancel</button>
-    <button class="primary" type="submit" id="publishButton">Publish listing</button>
-  </div>
-  <p id="listingMessage" class="muted" role="status" aria-live="polite">
-  </p>
+    <label>Category<select name="category">
+      <option>Electronics</option>
+      <option>Fashion</option>
+      <option>Home &amp; Furniture</option>
+      <option>Phones &amp; Accessories</option>
+      <option>Books &amp; Education</option>
+      <option>Baby &amp; Kids</option>
+      <option>Beauty</option>
+      <option>Sports &amp; Outdoors</option>
+      <option>Vehicles</option>
+      <option>Other</option>
+    </select>
+  </label>
+  <label>Location *<input name="location" required maxlength="120" placeholder="City, country">
+  </label>
+  <label>WhatsApp number *<input name="phone" required maxlength="30" type="tel" placeholder="+2348012345678">
+  </label>
+  <label class="full">Description *<textarea name="description" required rows="3" maxlength="2000">
+  </textarea>
+</label>
+<label class="full">Product photo (optional)<input type="file" name="photo" id="photo" accept="image/*">
+  <span class="muted">Maximum 5 MB.</span>
+  <img id="photoPreview" alt="Selected photo preview" style="display:none;width:100%;max-height:220px;object-fit:contain;background:#f2f5f2;border-radius:12px;padding:8px">
+</label>
+</div>
+<div class="formactions">
+  <button type="button" class="outline" data-close="sellModal">Cancel</button>
+  <button class="primary" type="submit" id="publishButton">Publish listing</button>
+</div>
+<p id="listingMessage" class="muted">
+</p>
 </form>
 </div>
 </div>
 <script>
 'use strict';
-const CATS=['All items','Electronics','Fashion','Home & Furniture','Phones & Accessories','Books & Education','Baby & Kids','Beauty','Sports & Outdoors','Vehicles','Other'];
-const SYMBOLS={NGN:'₦',USD:'$',GBP:'£',EUR:'€',GHS:'₵',KES:'KSh ',ZAR:'R'};
-let client=null,user=null,items=[],cat='All items',toastTimer=null,currentDetail=null;
-const $=id=>document.getElementById(id);
-function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function money(x){const n=Number(x.price);return (SYMBOLS[x.currency]||'')+(Number.isFinite(n)?n.toLocaleString(undefined,{maximumFractionDigits:2}):'—')}
-function openModal(id){$(id).classList.add('open')}function closeModal(id){$(id).classList.remove('open')}
-function showToast(message,type='success'){const t=$('toast');$('toastMessage').textContent=message;$('toastIcon').textContent=type==='error'?'!':'✓';t.classList.toggle('error',type==='error');t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),3500)}
-function showSetup(message){$('setupNotice').hidden=false;$('setupNotice').textContent=message}
-document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeModal(b.dataset.close)));
-document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)closeModal(m.id)}));
-document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal.open').forEach(m=>closeModal(m.id))});
-function openContact(x){if(!x)return;let n=String(x.phone||'').replace(/\D/g,'');if(n.startsWith('0'))n='234'+n.slice(1);if(!n){showToast('Seller has not provided a valid contact number.','error');return}const url='https://wa.me/'+n+'?text='+encodeURIComponent('Hello, I saw '+x.title+' on GamadNg Marketplace. Is it available?');const w=window.open(url,'_blank','noopener,noreferrer');if(!w)window.location.href=url}
-function renderCats(){$('cats').innerHTML=CATS.map(c=>`<button type="button" class="chip ${cat===c?'active':''}" data-cat="${esc(c)}">${esc(c)}</button>`).join('');document.querySelectorAll('[data-cat]').forEach(b=>b.addEventListener('click',()=>{cat=b.dataset.cat;renderCats();render()}))}
-async function loadListings(){if(!client){items=[];render();return}$('count').textContent='Loading listings…';try{const {data,error}=await client.from('listings').select('id,title,price,currency,condition,category,location,description,phone,image_url,created_at,seller_id').eq('status','active').order('created_at',{ascending:false}).limit(100);if(error)throw error;items=Array.isArray(data)?data:[];$('setupNotice').hidden=true}catch(error){showSetup('Could not load listings: '+(error.message||String(error))+' Check the Supabase table, policies, and API settings.');items=[]}render()}
-function showDetails(x){currentDetail=x;$('detailsTitle').textContent=x.title;$('detailsPrice').textContent=money(x);$('detailsMeta').textContent=[x.condition,x.category,x.location].filter(Boolean).join(' · ');$('detailsDescription').textContent=x.description||'No description provided.';const p=$('detailsPhoto');if(x.image_url){p.src=x.image_url;p.hidden=false}else{p.removeAttribute('src');p.hidden=true}openModal('detailsModal')}
-$('detailsContact').addEventListener('click',()=>openContact(currentDetail));
-function render(){const q=$('q').value.toLowerCase().trim(),condition=$('condition').value,sort=$('sort').value;let a=items.filter(x=>(cat==='All items'||x.category===cat)&&(condition==='All'||x.condition===condition)&&(!q||[x.title,x.category,x.location,x.description].join(' ').toLowerCase().includes(q)));a.sort((x,y)=>sort==='low'?Number(x.price)-Number(y.price):sort==='high'?Number(y.price)-Number(x.price):new Date(y.created_at||0)-new Date(x.created_at||0));$('count').textContent=a.length+' item(s)';const g=$('grid');if(!a.length){g.innerHTML='<div class="empty">No live listings yet. Sign in and publish the first item, or try another search.</div>';return}g.innerHTML=a.map(x=>`<article class="card"><div class="pic">${x.image_url?`<img src="${esc(x.image_url)}" alt="${esc(x.title)}" loading="lazy" referrerpolicy="no-referrer">`:esc(({Electronics:'💻',Fashion:'👕','Home & Furniture':'🛋️','Phones & Accessories':'📱','Books & Education':'📚','Baby & Kids':'🧸',Beauty:'🧴','Sports & Outdoors':'⚽',Vehicles:'🚲',Other:'📦'})[x.category]||'📦')}<span class="badge">${esc(x.condition)}</span></div><div class="body"><div class="muted">${esc(x.category)}</div><b>${esc(x.title)}</b><div class="price">${money(x)}</div><div class="muted">📍 ${esc(x.location)}</div><div class="actions"><button type="button" class="outline" data-details="${esc(x.id)}">Details</button><button type="button" class="primary" data-contact="${esc(x.id)}">Contact seller</button></div></div></article>`).join('');g.querySelectorAll('.pic img').forEach(img=>img.addEventListener('error',()=>{img.remove();const p=img.parentElement;p.classList.add('image-missing');if(!p.querySelector('.image-fallback')){const f=document.createElement('span');f.className='image-fallback';f.textContent='📦';f.setAttribute('aria-label','Product photo unavailable');p.appendChild(f)}}));document.querySelectorAll('[data-details]').forEach(b=>b.addEventListener('click',()=>{const x=items.find(z=>String(z.id)===b.dataset.details);if(x)showDetails(x)}));document.querySelectorAll('[data-contact]').forEach(b=>b.addEventListener('click',()=>openContact(items.find(z=>String(z.id)===b.dataset.contact))))}
-async function updateAuth(){$('authButton').hidden=false;if(!client){$('authStatus').textContent='Supabase setup required';$('signOut').hidden=true;return}try{const {data,error}=await client.auth.getSession();if(error)throw error;user=data.session?.user||null;$('authStatus').textContent=user?'Signed in: '+user.email:'Browse listings · Sign in to sell';$('signOut').hidden=!user}catch(error){$('authStatus').textContent='Could not check sign-in status';$('signOut').hidden=true;showSetup('Could not check your sign-in status: '+(error.message||String(error)))}}
-$('authButton').addEventListener('click',()=>{$('authMessage').textContent='';openModal('authModal')});
-$('signOut').addEventListener('click',async()=>{if(!client)return;const {error}=await client.auth.signOut();if(error){showToast('Could not sign out: '+error.message,'error');return}await updateAuth();showToast('You have signed out.')});
-$('registerButton').addEventListener('click',async()=>{if(!client){$('authMessage').textContent='Supabase is not configured. Check config.js.';return}const f=new FormData($('authForm')),email=String(f.get('email')||'').trim(),password=String(f.get('password')||'');if(!email||password.length<8){$('authMessage').textContent='Enter a valid email and a password of at least 8 characters.';return}const b=$('registerButton');b.disabled=true;$('authMessage').textContent='Creating account…';try{const {data,error}=await client.auth.signUp({email,password});if(error)throw error;$('authMessage').textContent=data.session?'Account created and signed in.':'Account created. Check your email for a confirmation link.';if(data.session){await updateAuth();setTimeout(()=>closeModal('authModal'),700)}}catch(error){$('authMessage').textContent=error.message||String(error)}finally{b.disabled=false}});
-$('authForm').addEventListener('submit',async e=>{e.preventDefault();if(!client){$('authMessage').textContent='Supabase is not configured. Check config.js.';return}const f=new FormData(e.currentTarget),email=String(f.get('email')||'').trim(),password=String(f.get('password')||''),b=e.currentTarget.querySelector('button[type="submit"]');b.disabled=true;$('authMessage').textContent='Signing in…';try{const {error}=await client.auth.signInWithPassword({email,password});if(error)throw error;$('authMessage').textContent='Signed in successfully.';await updateAuth();setTimeout(()=>closeModal('authModal'),700)}catch(error){$('authMessage').textContent=error.message||String(error)}finally{b.disabled=false}});
-function openSell(){if(!client){showSetup('Supabase is not configured yet. Check config.js and Supabase project settings.');return}if(!user){openModal('authModal');$('authMessage').textContent='Please sign in or create an account before listing an item.';return}$('listingMessage').textContent='';openModal('sellModal')}
-$('sellTop').addEventListener('click',openSell);$('sellHero').addEventListener('click',openSell);$('search').addEventListener('click',render);$('q').addEventListener('keydown',e=>{if(e.key==='Enter')render()});$('condition').addEventListener('change',render);$('sort').addEventListener('change',render);
-let photoPreviewUrl=null;$('photo').addEventListener('change',()=>{const file=$('photo').files[0],preview=$('photoPreview');if(photoPreviewUrl){URL.revokeObjectURL(photoPreviewUrl);photoPreviewUrl=null}if(!file){preview.style.display='none';preview.removeAttribute('src');return}if(!file.type.startsWith('image/')||file.size>5*1024*1024){preview.style.display='none';preview.removeAttribute('src');showToast(file.size>5*1024*1024?'Choose an image smaller than 5 MB.':'Please choose an image file.','error');$('photo').value='';return}photoPreviewUrl=URL.createObjectURL(file);preview.src=photoPreviewUrl;preview.style.display='block'});$('listingForm').addEventListener('submit',async e=>{e.preventDefault();if(!client||!user){$('listingMessage').textContent='Please sign in first.';return}const f=e.currentTarget,d=new FormData(f),file=$('photo').files[0],publish=$('publishButton');publish.disabled=true;$('listingMessage').textContent='Publishing listing…';let uploadedPath=null;try{let image_url=null;if(file){if(file.size>5*1024*1024)throw new Error('Choose an image smaller than 5 MB.');if(!file.type.startsWith('image/'))throw new Error('Please choose an image file.');const ext=(file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'')||'jpg',path=user.id+'/'+crypto.randomUUID()+'.'+ext;const {error:upErr}=await client.storage.from('listing-images').upload(path,file,{upsert:false,contentType:file.type});if(upErr)throw upErr;uploadedPath=path;const {data:urlData}=client.storage.from('listing-images').getPublicUrl(path);image_url=urlData?.publicUrl||null}const row={seller_id:user.id,title:String(d.get('title')||'').trim(),price:Number(d.get('price')),currency:d.get('currency'),condition:d.get('condition'),category:d.get('category'),location:String(d.get('location')||'').trim(),phone:String(d.get('phone')||'').trim(),description:String(d.get('description')||'').trim(),image_url,status:'active'};if(!row.title||!Number.isFinite(row.price)||row.price<0||!row.location||!row.phone||!row.description)throw new Error('Please complete all required fields correctly.');const {error}=await client.from('listings').insert(row);if(error)throw error;closeModal('sellModal');f.reset();$('photoPreview').style.display='none';$('photoPreview').removeAttribute('src');if(photoPreviewUrl){URL.revokeObjectURL(photoPreviewUrl);photoPreviewUrl=null}await loadListings();showToast('Your listing is live! 🎉')}catch(error){$('listingMessage').textContent='Could not publish: '+(error.message||String(error));if(uploadedPath){try{await client.storage.from('listing-images').remove([uploadedPath])}catch(_){}}}finally{publish.disabled=false}});
-async function init(){$('authButton').hidden=false;const cfg=window.GAMADNG_SUPABASE||{};if(!cfg.url||!cfg.anonKey||String(cfg.url).includes('YOUR_PROJECT')||String(cfg.anonKey).includes('YOUR_SUPABASE')){showSetup('Supabase is not connected yet. Add your project URL and publishable/anon key to config.js. Do not use a service-role key in a browser.');$('authStatus').textContent='Supabase setup required';renderCats();render();return}if(!window.supabase){showSetup('The Supabase library did not load. Check your internet connection and reload the page.');$('authStatus').textContent='Supabase library unavailable';renderCats();render();return}try{client=window.supabase.createClient(cfg.url,cfg.anonKey);client.auth.onAuthStateChange((_event,session)=>{Promise.resolve().then(()=>{user=session?.user||null;return updateAuth()}).catch(()=>$('authButton').hidden=false)});await updateAuth();renderCats();await loadListings()}catch(error){showSetup('Marketplace initialization failed: '+(error.message||String(error)));$('authStatus').textContent='Marketplace setup error';renderCats();render()}}
-window.addEventListener('pageshow',()=>$('authButton').hidden=false);init();
-</script>
-</body>
+const CATS=['All items','Electronics','Fashion','Home & Furniture','Phones & Accessories','Books & Education','Baby & Kids','Beauty','Sports & Outdoors','Vehicles','Other'];const SYMBOLS={NGN:'₦',USD:'$',GBP:'£',EUR:'€',GHS:'₵',KES:'KSh ',ZAR:'R'};let client=null,user=null,items=[],cat='All items',toastTimer=null,currentDetail=null,profiles={},reviews={};const $=id=>document.getElementById(id);function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}function money(x){const n=Number(x.price);return(SYMBOLS[x.currency]||'')+(Number.isFinite(n)?n.toLocaleString(undefined,{maximumFractionDigits:2}):'—')}function openModal(id){$(id).classList.add('open')}function closeModal(id){$(id).classList.remove('open')}function showToast(msg,type='success'){const t=$('toast');t.textContent=msg;t.classList.toggle('error',type==='error');t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),3500)}function showSetup(msg){$('setupNotice').hidden=false;$('setupNotice').textContent=msg}
+document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeModal(b.dataset.close)));document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)closeModal(m.id)}));document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal.open').forEach(m=>closeModal(m.id))});function openContact(x){if(!x)return;let n=String(x.phone||'').replace(/\D/g,'');if(n.startsWith('0'))n='234'+n.slice(1);if(!n){showToast('Seller has not provided a valid contact number.','error');return}const url='https://wa.me/'+n+'?text='+encodeURIComponent('Hello, I saw '+x.title+' on GamadNg Marketplace. Is it available?');const w=window.open(url,'_blank','noopener,noreferrer');if(!w)window.location.href=url}
+function renderCats(){$('cats').innerHTML=CATS.map(c=>`<button type="button" class="chip ${cat===c?'active':''}" data-cat="${esc(c)}">${esc(c)}</button>`).join('');$('cats').querySelectorAll('[data-cat]').forEach(b=>b.addEventListener('click',()=>{cat=b.dataset.cat;renderCats();render()}))}
+async function loadSellerData(){if(!client||!items.length)return;const ids=[...new Set(items.map(x=>x.seller_id).filter(Boolean))];if(!ids.length)return;try{const {data,error}=await client.from('seller_profiles').select('user_id,display_name,bio,location').in('user_id',ids);if(error)throw error;profiles={};(data||[]).forEach(p=>profiles[p.user_id]=p)}catch(e){console.warn('Seller profiles unavailable:',e.message)}try{const {data,error}=await client.from('seller_reviews').select('id,seller_id,reviewer_id,rating,comment,created_at').in('seller_id',ids).order('created_at',{ascending:false});if(error)throw error;reviews={};(data||[]).forEach(r=>(reviews[r.seller_id]||(reviews[r.seller_id]=[])).push(r))}catch(e){console.warn('Seller reviews unavailable:',e.message)}}function ratingSummary(id){const a=reviews[id]||[];if(!a.length)return '<span class="muted">No ratings yet</span>';const avg=a.reduce((s,r)=>s+Number(r.rating),0)/a.length;return `<span class="stars">${'★'.repeat(Math.round(avg))}${'☆'.repeat(5-Math.round(avg))}</span> ${avg.toFixed(1)} (${a.length} ${a.length===1?'review':'reviews'})`}function sellerName(id){const p=profiles[id];return p&&p.display_name.trim()?p.display_name:'Marketplace seller'}
+async function loadListings(){if(!client){items=[];render();return}$('count').textContent='Loading listings…';try{const {data,error}=await client.from('listings').select('id,title,price,currency,condition,category,location,description,phone,image_url,created_at,seller_id').eq('status','active').order('created_at',{ascending:false}).limit(100);if(error)throw error;items=Array.isArray(data)?data:[];$('setupNotice').hidden=true;await loadSellerData()}catch(error){showSetup('Could not load listings: '+(error.message||String(error))+' Check Supabase table, policies, and API settings.');items=[]}render()}
+async function showDetails(x){currentDetail=x;$('detailsTitle').textContent=x.title;$('detailsPrice').textContent=money(x);$('detailsMeta').textContent=[x.condition,x.category,x.location].filter(Boolean).join(' · ');$('detailsDescription').textContent=x.description||'No description provided.';const p=$('detailsPhoto');if(x.image_url){p.src=x.image_url;p.hidden=false}else{p.removeAttribute('src');p.hidden=true}await loadOneSeller(x.seller_id);renderSellerDetail(x);renderReviews(x);openModal('detailsModal')}
+async function loadOneSeller(id){if(!client||!id)return;try{const {data,error}=await client.from('seller_profiles').select('user_id,display_name,bio,location').eq('user_id',id).maybeSingle();if(error)throw error;if(data)profiles[id]=data}catch(e){console.warn(e.message)}try{const {data,error}=await client.from('seller_reviews').select('id,seller_id,reviewer_id,rating,comment,created_at').eq('seller_id',id).order('created_at',{ascending:false});if(error)throw error;reviews[id]=data||[]}catch(e){console.warn(e.message)}}function renderSellerDetail(x){const p=profiles[x.seller_id]||{};$('detailSeller').innerHTML=`<strong>${esc(p.display_name||'Marketplace seller')}</strong><div class="muted">${esc(p.location||x.location||'Location not provided')}</div><p>${esc(p.bio||'This seller has not added a bio yet.')}</p><div>${ratingSummary(x.seller_id)}</div>`;$('editSellerFromDetails').hidden=!(user&&user.id===x.seller_id)}function renderReviews(x){const a=reviews[x.seller_id]||[];$('reviewSummary').innerHTML=ratingSummary(x.seller_id);$('reviewList').innerHTML=a.length?a.slice(0,8).map(r=>`<div class="review"><div class="stars">${'★'.repeat(Number(r.rating))}${'☆'.repeat(5-Number(r.rating))}</div><div>${esc(r.comment||'No written comment.')}</div><div class="muted">${new Date(r.created_at).toLocaleDateString()}</div></div>`).join(''):'<p class="muted">No reviews yet. Be the first to review this seller after a transaction.</p>';$('reviewFormWrap').hidden=!user||user.id===x.seller_id;$('reviewMessage').textContent='';if(user&&a.some(r=>r.reviewer_id===user.id)){$('reviewFormWrap').hidden=true;$('reviewMessage').textContent='You have already reviewed this seller.'}if(!user)$('reviewMessage').textContent='Sign in to leave a review.'}
+$('detailsContact').addEventListener('click',()=>openContact(currentDetail));$('editSellerFromDetails').addEventListener('click',()=>{closeModal('detailsModal');openProfile()});function render(){const q=$('q').value.toLowerCase().trim(),condition=$('condition').value,sort=$('sort').value;let a=items.filter(x=>(cat==='All items'||x.category===cat)&&(condition==='All'||x.condition===condition)&&(!q||[x.title,x.category,x.location,x.description].join(' ').toLowerCase().includes(q)));a.sort((x,y)=>sort==='low'?Number(x.price)-Number(y.price):sort==='high'?Number(y.price)-Number(x.price):new Date(y.created_at||0)-new Date(x.created_at||0));$('count').textContent=a.length+' item(s)';const g=$('grid');if(!a.length){g.innerHTML='<div class="empty">No live listings yet. Sign in and publish the first item, or try another search.</div>';return}g.innerHTML=a.map(x=>`<article class="card"><div class="pic">${x.image_url?`<img src="${esc(x.image_url)}" alt="${esc(x.title)}" loading="lazy">`:esc(({Electronics:'💻',Fashion:'👕','Home & Furniture':'🛋️','Phones & Accessories':'📱','Books & Education':'📚','Baby & Kids':'🧸',Beauty:'🧴','Sports & Outdoors':'⚽',Vehicles:'🚲',Other:'📦'})[x.category]||'📦')}<span class="badge">${esc(x.condition)}</span></div><div class="body"><div class="muted">${esc(x.category)}</div><b>${esc(x.title)}</b><div class="price">${money(x)}</div><div class="muted">📍 ${esc(x.location)}</div><div class="seller-mini">${esc(sellerName(x.seller_id))}<br>${ratingSummary(x.seller_id)}</div><div class="actions"><button type="button" class="outline" data-details="${esc(x.id)}">Details</button><button type="button" class="primary" data-contact="${esc(x.id)}">Contact seller</button></div></div></article>`).join('');g.querySelectorAll('.pic img').forEach(img=>img.addEventListener('error',()=>img.remove()));g.querySelectorAll('[data-details]').forEach(b=>b.addEventListener('click',()=>{const x=items.find(z=>String(z.id)===b.dataset.details);if(x)showDetails(x)}));g.querySelectorAll('[data-contact]').forEach(b=>b.addEventListener('click',()=>openContact(items.find(z=>String(z.id)===b.dataset.contact))))}
+async function updateAuth(){if(!client){$('authStatus').textContent='Supabase setup required';return}try{const {data,error}=await client.auth.getSession();if(error)throw error;user=data.session?.user||null;$('authStatus').textContent=user?'Signed in: '+user.email:'Browse listings · Sign in to sell';$('signOut').hidden=!user;$('profileTop').hidden=!user}catch(e){$('authStatus').textContent='Could not check sign-in status'}}$('authButton').addEventListener('click',()=>{$('authMessage').textContent='';openModal('authModal')});$('signOut').addEventListener('click',async()=>{if(!client)return;const {error}=await client.auth.signOut();if(error){showToast(error.message,'error');return}await updateAuth();showToast('You have signed out.')});$('registerButton').addEventListener('click',async()=>{if(!client)return;const f=new FormData($('authForm')),email=String(f.get('email')||'').trim(),password=String(f.get('password')||'');if(!email||password.length<8){$('authMessage').textContent='Enter a valid email and a password of at least 8 characters.';return}const b=$('registerButton');b.disabled=true;$('authMessage').textContent='Creating account…';try{const {data,error}=await client.auth.signUp({email,password});if(error)throw error;$('authMessage').textContent=data.session?'Account created and signed in.':'Account created. Check your email for confirmation.';if(data.session){await updateAuth();setTimeout(()=>closeModal('authModal'),700)}}catch(e){$('authMessage').textContent=e.message||String(e)}finally{b.disabled=false}});$('authForm').addEventListener('submit',async e=>{e.preventDefault();if(!client)return;const f=new FormData(e.currentTarget),b=e.currentTarget.querySelector('[type="submit"]');b.disabled=true;$('authMessage').textContent='Signing in…';try{const {error}=await client.auth.signInWithPassword({email:String(f.get('email')||'').trim(),password:String(f.get('password')||'')});if(error)throw error;await updateAuth();$('authMessage').textContent='Signed in successfully.';await loadListings();setTimeout(()=>closeModal('authModal'),700)}catch(err){$('authMessage').textContent=err.message||String(err)}finally{b.disabled=false}});
+function openSell(){if(!client){showSetup('Supabase is not configured. Check config.js.');return}if(!user){openModal('authModal');$('authMessage').textContent='Please sign in before listing an item.';return}$('listingMessage').textContent='';openModal('sellModal')}function openProfile(){if(!user){openModal('authModal');$('authMessage').textContent='Please sign in to edit your seller profile.';return}$('profileMessage').textContent='';const p=profiles[user.id]||{};const f=$('profileForm');f.elements.display_name.value=p.display_name||'';f.elements.location.value=p.location||'';f.elements.bio.value=p.bio||'';openModal('profileModal')}$('profileTop').addEventListener('click',openProfile);$('sellTop').addEventListener('click',openSell);$('sellHero').addEventListener('click',openSell);$('search').addEventListener('click',render);$('q').addEventListener('keydown',e=>{if(e.key==='Enter')render()});$('condition').addEventListener('change',render);$('sort').addEventListener('change',render);
+$('profileForm').addEventListener('submit',async e=>{e.preventDefault();if(!user||!client)return;const f=new FormData(e.currentTarget),b=$('saveProfile'),row={user_id:user.id,display_name:String(f.get('display_name')||'').trim(),location:String(f.get('location')||'').trim(),bio:String(f.get('bio')||'').trim(),updated_at:new Date().toISOString()};b.disabled=true;$('profileMessage').textContent='Saving profile…';try{const {error}=await client.from('seller_profiles').upsert(row,{onConflict:'user_id'});if(error)throw error;profiles[user.id]=row;closeModal('profileModal');render();if(currentDetail&&currentDetail.seller_id===user.id)renderSellerDetail(currentDetail);showToast('Seller profile saved.')}catch(err){$('profileMessage').textContent='Could not save profile: '+(err.message||String(err))}finally{b.disabled=false}});
+$('reviewForm').addEventListener('submit',async e=>{e.preventDefault();if(!user||!currentDetail||!client)return;const f=new FormData(e.currentTarget),b=$('submitReview'),row={seller_id:currentDetail.seller_id,reviewer_id:user.id,rating:Number(f.get('rating')),comment:String(f.get('comment')||'').trim()};if(row.seller_id===user.id){$('reviewMessage').textContent='You cannot review your own seller profile.';return}b.disabled=true;$('reviewMessage').textContent='Submitting review…';try{const {error}=await client.from('seller_reviews').insert(row);if(error)throw error;await loadOneSeller(currentDetail.seller_id);renderReviews(currentDetail);render();e.currentTarget.reset();showToast('Thank you for your review.')}catch(err){$('reviewMessage').textContent=err.code==='23505'?'You have already reviewed this seller.':(err.message||String(err))}finally{b.disabled=false}});
+let photoPreviewUrl=null;$('photo').addEventListener('change',()=>{const file=$('photo').files[0],p=$('photoPreview');if(photoPreviewUrl)URL.revokeObjectURL(photoPreviewUrl);photoPreviewUrl=null;if(!file){p.style.display='none';p.removeAttribute('src');return}if(!file.type.startsWith('image/')||file.size>5*1024*1024){showToast('Choose an image smaller than 5 MB.','error');$('photo').value='';p.style.display='none';return}photoPreviewUrl=URL.createObjectURL(file);p.src=photoPreviewUrl;p.style.display='block'});$('listingForm').addEventListener('submit',async e=>{e.preventDefault();if(!client||!user)return;const f=e.currentTarget,d=new FormData(f),file=$('photo').files[0],b=$('publishButton');b.disabled=true;$('listingMessage').textContent='Publishing listing…';let uploadedPath=null;try{let image_url=null;if(file){if(file.size>5*1024*1024||!file.type.startsWith('image/'))throw new Error('Choose a valid image smaller than 5 MB.');const ext=(file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'')||'jpg',path=user.id+'/'+crypto.randomUUID()+'.'+ext;const {error}=await client.storage.from('listing-images').upload(path,file,{upsert:false,contentType:file.type});if(error)throw error;uploadedPath=path;image_url=client.storage.from('listing-images').getPublicUrl(path).data?.publicUrl||null}const row={seller_id:user.id,title:String(d.get('title')||'').trim(),price:Number(d.get('price')),currency:d.get('currency'),condition:d.get('condition'),category:d.get('category'),location:String(d.get('location')||'').trim(),phone:String(d.get('phone')||'').trim(),description:String(d.get('description')||'').trim(),image_url,status:'active'};if(!row.title||!Number.isFinite(row.price)||row.price<0||!row.location||!row.phone||!row.description)throw new Error('Please complete all required fields.');const {error}=await client.from('listings').insert(row);if(error)throw error;closeModal('sellModal');f.reset();$('photoPreview').style.display='none';if(photoPreviewUrl)URL.revokeObjectURL(photoPreviewUrl);photoPreviewUrl=null;await loadListings();showToast('Your listing is live! 🎉')}catch(err){$('listingMessage').textContent='Could not publish: '+(err.message||String(err));if(uploadedPath)try{await client.storage.from('listing-images').remove([uploadedPath])}catch(_){}}finally{b.disabled=false}});
+async function init(){$('authButton').hidden=false;const cfg=window.GAMADNG_SUPABASE||{};if(!cfg.url||!cfg.anonKey||String(cfg.url).includes('YOUR_PROJECT')||String(cfg.anonKey).includes('YOUR_SUPABASE')){showSetup('Supabase is not connected. Add your project URL and publishable/anon key to config.js. Never use a service-role key in a browser.');$('authStatus').textContent='Supabase setup required';renderCats();render();return}if(!window.supabase){showSetup('Supabase library did not load. Check your internet connection.');renderCats();render();return}try{client=window.supabase.createClient(cfg.url,cfg.anonKey);client.auth.onAuthStateChange((_event,session)=>{Promise.resolve().then(async()=>{user=session?.user||null;await updateAuth();await loadListings()}).catch(()=>{})});await updateAuth();renderCats();await loadListings()}catch(err){showSetup('Marketplace initialization failed: '+(err.message||String(err)));renderCats();render()}}window.addEventListener('pageshow',()=>{$('authButton').hidden=false});init();
+</script></body>
 </html>
